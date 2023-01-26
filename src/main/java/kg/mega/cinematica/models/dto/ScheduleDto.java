@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Getter
@@ -15,6 +17,7 @@ import java.time.LocalTime;
 public class ScheduleDto extends WorkDateDto {
     @JsonIgnore
     Long id;
-    LocalTime startDate;
+    LocalTime startTime;
+    LocalDate startDay;
 
 }

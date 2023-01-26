@@ -9,6 +9,8 @@ import kg.mega.cinematica.models.request.SaveCinemaRequest;
 import kg.mega.cinematica.service.CinemaService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +47,7 @@ public class CinemaServiceImpl implements CinemaService {
     @Override
     public List<CinemaDto> findAll() {
         return mapper.toDtos(rep.findAll());
+
     }
 
     @Override

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -31,9 +33,10 @@ public class ScheduleController {
 
     @PostMapping("/create")
     @ApiOperation("Создание")
-    ResponseEntity<?> create(@RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime startDate) {
+    ResponseEntity<?> create(@RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime startTime,
+                             @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDay) {
 
-            return new ResponseEntity<>(service.create(startDate), HttpStatus.CREATED);
+            return new ResponseEntity<>(service.create(startTime,startDay), HttpStatus.CREATED);
 
     }
 
