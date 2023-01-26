@@ -23,11 +23,8 @@ public class RoomMovieController {
     @PostMapping("/save")
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody RoomMovieDto roomMovieDto) {
-        try {
             return new ResponseEntity<>(service.save(roomMovieDto), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
+
     }
 
     @GetMapping("/findById")

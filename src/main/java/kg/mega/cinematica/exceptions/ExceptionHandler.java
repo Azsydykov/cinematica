@@ -20,42 +20,42 @@ public class ExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<?> handleException(OrderDetailNotFoundException e){
-        return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<?> handleException(OrderNotFoundException e){
-        return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<?> handleException(PriceNotFoundException e){
-        return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<?> handleException(RoomMovieNotFoundException e){
-        return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<?> handleException(RoomNotFoundException e){
-        return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<?> handleException(ScheduleNotFoundException e){
-        return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<?> handleException(SeatScheduleNotFoundException e){
-        return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<?> handleException(SeatNotFoundException e){
-        return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
+        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
 }

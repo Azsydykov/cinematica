@@ -22,11 +22,8 @@ public class OrderController {
     @PostMapping("/save")
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody OrderDto orderDto) {
-        try {
+
             return new ResponseEntity<>(service.save(orderDto), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
     }
 
     @GetMapping("/findById")

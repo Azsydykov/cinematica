@@ -3,6 +3,7 @@ package kg.mega.cinematica.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kg.mega.cinematica.models.dto.SeatDto;
+import kg.mega.cinematica.models.request.SaveSeatRequest;
 import kg.mega.cinematica.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,11 +23,15 @@ public class SeatController {
     @PostMapping("/save")
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody SeatDto seatDto) {
-        try {
             return new ResponseEntity<>(service.save(seatDto), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
+
+    }
+
+    @PostMapping("/book")
+    @ApiOperation("Забронировать/Купить")
+    ResponseEntity<?> book(@ModelAttribute SaveSeatRequest seat) {
+            return new ResponseEntity<>(service.book(seat), HttpStatus.CREATED);
+
     }
 
     @GetMapping("/findById")

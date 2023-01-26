@@ -24,21 +24,17 @@ public class ScheduleController {
     @PostMapping("/save")
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody ScheduleDto scheduleDto) {
-        try {
+
             return new ResponseEntity<>(service.save(scheduleDto), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
+
     }
 
     @PostMapping("/create")
     @ApiOperation("Создание")
     ResponseEntity<?> create(@RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime startDate) {
-        try {
+
             return new ResponseEntity<>(service.create(startDate), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
+
     }
 
     @GetMapping("/findById")

@@ -23,21 +23,16 @@ public class PriceController {
     @PostMapping("/save")
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody PriceDto priceDto) {
-        try {
+
             return new ResponseEntity<>(service.save(priceDto), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
     }
 
     @PostMapping("/create")
     @ApiOperation("Создание")
     ResponseEntity<?> create(@ModelAttribute SavePriceRequest price) {
-        try {
+
             return new ResponseEntity<>(service.create(price), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
+
     }
 
     @GetMapping("/findById")

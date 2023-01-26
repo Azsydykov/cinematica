@@ -31,11 +31,8 @@ public class CinemaController {
     @PostMapping("/create")
     @ApiOperation("Создание")
     ResponseEntity<?> create(@ModelAttribute SaveCinemaRequest cinema) {
-        try {
             return new ResponseEntity<>(service.create(cinema), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
+
     }
 
     @GetMapping("/findById")

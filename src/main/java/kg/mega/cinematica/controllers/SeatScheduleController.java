@@ -22,11 +22,7 @@ public class SeatScheduleController {
     @PostMapping("/save")
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody SeatScheduleDto seatScheduleDto) {
-        try {
             return new ResponseEntity<>(service.save(seatScheduleDto), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
     }
 
     @GetMapping("/findById")

@@ -23,21 +23,15 @@ public class MovieController {
     @PostMapping("/save")
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody MovieDto movieDto) {
-        try {
             return new ResponseEntity<>(service.save(movieDto), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
     }
 
     @PostMapping("/create")
     @ApiOperation("Создание")
     ResponseEntity<?> create(@ModelAttribute SaveMovieRequest movie) {
-        try {
+
             return new ResponseEntity<>(service.create(movie), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
+
     }
 
     @GetMapping("/findById")

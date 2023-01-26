@@ -23,21 +23,16 @@ public class RoomController {
     @PostMapping("/save")
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody RoomDto roomDto) {
-        try {
+
             return new ResponseEntity<>(service.save(roomDto), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
     }
 
     @PostMapping("/create")
     @ApiOperation("Создать")
     ResponseEntity<?> create(@ModelAttribute SaveRoomRequest room) {
-        try {
+
             return new ResponseEntity<>(service.create(room), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
+
     }
 
     @GetMapping("/findById")
