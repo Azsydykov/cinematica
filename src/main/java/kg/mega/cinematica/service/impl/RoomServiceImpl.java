@@ -1,6 +1,7 @@
 package kg.mega.cinematica.service.impl;
 
 import kg.mega.cinematica.dao.RoomRep;
+import kg.mega.cinematica.exceptions.RoomNotFoundException;
 import kg.mega.cinematica.mappers.RoomMapper;
 import kg.mega.cinematica.models.dto.CinemaDto;
 import kg.mega.cinematica.models.dto.RoomDto;
@@ -29,7 +30,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public RoomDto findById(Long id) {
-        return mapper.toDto(rep.findById(id).orElseThrow(() -> new RuntimeException("Room not found!")));
+        return mapper.toDto(rep.findById(id).orElseThrow(() -> new RoomNotFoundException("Room not found!")));
     }
 
     @Override
@@ -45,9 +46,10 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Object create(SaveRoomRequest room) {
+    public RoomDto create(SaveRoomRequest room) {
         CinemaDto cinema = cinemaService.findById(room.getCinemaId());
         RoomDto roomDto = new RoomDto();
+        roomDto.setName(room.getName());
         roomDto.setSeatCount(room.getSeatCount());
         roomDto.setCinema(cinema);
         return save(roomDto);

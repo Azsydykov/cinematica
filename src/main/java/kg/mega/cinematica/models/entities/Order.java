@@ -20,17 +20,5 @@ public class Order extends WorkDate{
     Long id;
     int price;
     LocalTime startTime;
-    boolean active;
-
-
-    @PrePersist
-    protected void onCreate() {
-        active = true;
-    }
-
-
-
-
-
 
 }

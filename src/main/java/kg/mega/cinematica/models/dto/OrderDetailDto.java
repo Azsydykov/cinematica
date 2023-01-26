@@ -1,5 +1,6 @@
 package kg.mega.cinematica.models.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kg.mega.cinematica.models.entities.Order;
 import kg.mega.cinematica.models.entities.OrderDetail;
 import kg.mega.cinematica.models.entities.SeatSchedule;
@@ -19,5 +20,5 @@ public class OrderDetailDto extends WorkDateDto {
     Long id;
     SeatScheduleDto schedule;
     OrderDto order;
-    boolean active;
+
 }

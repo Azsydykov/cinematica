@@ -1,4 +1,4 @@
-package kg.mega.cinematica.models.request;
+package kg.mega.cinematica.models.responces;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,8 +8,12 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SaveRoomRequest {
-    Long cinemaId;
-    int seatCount;
-    String name;
+public class Responce {
+    String message;
+
+    public Responce(String message) {
+        this.message = message;
+    }
+
+
 }

@@ -20,15 +20,5 @@ public class Price extends WorkDate{
     Double price;
     @Enumerated(EnumType.STRING)
     PriceType priceType;
-    boolean active;
-
-    @PrePersist
-    protected void onCreate() {
-        active = true;
-    }
-
-
-
-
 
 }

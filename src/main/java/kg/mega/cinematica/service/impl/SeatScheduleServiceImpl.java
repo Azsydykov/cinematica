@@ -1,6 +1,7 @@
 package kg.mega.cinematica.service.impl;
 
 import kg.mega.cinematica.dao.SeatScheduleRep;
+import kg.mega.cinematica.exceptions.SeatScheduleNotFoundException;
 import kg.mega.cinematica.mappers.SeatScheduleMapper;
 import kg.mega.cinematica.models.dto.SeatScheduleDto;
 import kg.mega.cinematica.service.SeatScheduleService;
@@ -24,7 +25,7 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
 
     @Override
     public SeatScheduleDto findById(Long id) {
-        return mapper.toDto(rep.findById(id).orElseThrow(()->new RuntimeException("Seat Schedule not found!")));
+        return mapper.toDto(rep.findById(id).orElseThrow(()->new SeatScheduleNotFoundException("Seat Schedule not found!")));
     }
 
     @Override

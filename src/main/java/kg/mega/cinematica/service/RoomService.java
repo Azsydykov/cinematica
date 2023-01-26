@@ -4,5 +4,5 @@ import kg.mega.cinematica.models.dto.RoomDto;
 import kg.mega.cinematica.models.request.SaveRoomRequest;
 
 public interface RoomService extends BaseService<RoomDto>{
-    Object create(SaveRoomRequest room);
+    RoomDto create(SaveRoomRequest room);
 }

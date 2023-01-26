@@ -21,12 +21,14 @@ public class WorkDate {
     Date addDate;
     @JoinColumn(name = "update_date")
     Date updateDate;
+    boolean active;
 
 
     @PrePersist
     protected void onCreate() {
         addDate = new Date();
         updateDate = new Date();
+        active=true;
     }
 
     @PreUpdate

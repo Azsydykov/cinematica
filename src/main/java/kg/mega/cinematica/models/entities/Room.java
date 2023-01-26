@@ -16,9 +16,11 @@ public class Room extends WorkDate{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    String name;
     @ManyToOne
     Cinema cinema;
     int seatCount;
+
 
 
 

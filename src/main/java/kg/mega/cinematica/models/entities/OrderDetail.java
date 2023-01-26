@@ -21,12 +21,7 @@ public class OrderDetail extends WorkDate {
     SeatSchedule schedule;
     @ManyToOne
     Order order;
-    boolean active;
 
-    @PrePersist
-    protected void onCreate() {
-        active = true;
-    }
 
 
 

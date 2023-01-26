@@ -1,5 +1,6 @@
 package kg.mega.cinematica.models.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kg.mega.cinematica.enums.SeatStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,9 +11,10 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SeatScheduleDto extends WorkDateDto {
+    @JsonIgnore
     Long id;
     SeatDto seat;
     RoomMovieDto roomMovie;
     SeatStatus seatStatus;
-    boolean active;
+
 }

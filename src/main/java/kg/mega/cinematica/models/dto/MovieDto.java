@@ -1,5 +1,6 @@
 package kg.mega.cinematica.models.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,8 +15,7 @@ public class MovieDto extends WorkDateDto {
     String definition;
     String name;
     Double rating;
-    int pg;
-    boolean active;
+    String pg;
     String image;
 
 

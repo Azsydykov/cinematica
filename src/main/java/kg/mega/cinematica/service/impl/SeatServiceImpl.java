@@ -1,6 +1,7 @@
 package kg.mega.cinematica.service.impl;
 
 import kg.mega.cinematica.dao.SeatRep;
+import kg.mega.cinematica.exceptions.SeatNotFoundException;
 import kg.mega.cinematica.mappers.SeatMapper;
 import kg.mega.cinematica.models.dto.SeatDto;
 import kg.mega.cinematica.service.SeatService;
@@ -25,7 +26,7 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public SeatDto findById(Long id) {
-        return mapper.toDto(rep.findById(id).orElseThrow(()->new RuntimeException("Seat nor found!")));
+        return mapper.toDto(rep.findById(id).orElseThrow(()->new SeatNotFoundException("Seat nor found!")));
     }
 
     @Override

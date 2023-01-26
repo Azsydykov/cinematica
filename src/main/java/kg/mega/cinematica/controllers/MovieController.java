@@ -3,6 +3,7 @@ package kg.mega.cinematica.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kg.mega.cinematica.models.dto.MovieDto;
+import kg.mega.cinematica.models.request.SaveMovieRequest;
 import kg.mega.cinematica.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,13 +30,22 @@ public class MovieController {
         }
     }
 
+    @PostMapping("/create")
+    @ApiOperation("Создание")
+    ResponseEntity<?> create(@ModelAttribute SaveMovieRequest movie) {
+        try {
+            return new ResponseEntity<>(service.create(movie), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+    }
+
     @GetMapping("/findById")
     @ApiOperation("Поиск фильма по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
-
         return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
-
     }
+
     @GetMapping("/findAll")
     @ApiOperation("Вывод всех фильмов")
     ResponseEntity<List<MovieDto>> findAll() {
@@ -45,10 +55,7 @@ public class MovieController {
     @DeleteMapping("/delete")
     @ApiOperation("Удаление")
     ResponseEntity<?> delete(@RequestParam Long id) {
-        try {
             return ResponseEntity.ok(service.delete(id));
-        } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+
     }
 }

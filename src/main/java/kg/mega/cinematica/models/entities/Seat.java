@@ -20,13 +20,6 @@ public class Seat extends WorkDate{
     @ManyToOne
     Room room;
     int row;
-    boolean active;
-
-    protected void onCreate() {
-        active = true;
-    }
-
-
 
 
 }

@@ -33,10 +33,9 @@ public class RoomMovieController {
     @GetMapping("/findById")
     @ApiOperation("Поиск по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
-
         return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
-
     }
+
     @GetMapping("/findAll")
     @ApiOperation("Вывод всех")
     ResponseEntity<List<RoomMovieDto>> findAll() {
@@ -46,10 +45,6 @@ public class RoomMovieController {
     @DeleteMapping("/delete")
     @ApiOperation("Удаление")
     ResponseEntity<?> delete(@RequestParam Long id) {
-        try {
-            return ResponseEntity.ok(service.delete(id));
-        } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+        return ResponseEntity.ok(service.delete(id));
     }
 }

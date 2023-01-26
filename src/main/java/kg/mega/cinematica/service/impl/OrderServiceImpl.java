@@ -1,6 +1,7 @@
 package kg.mega.cinematica.service.impl;
 
 import kg.mega.cinematica.dao.OrderRep;
+import kg.mega.cinematica.exceptions.OrderNotFoundException;
 import kg.mega.cinematica.mappers.OrderMapper;
 import kg.mega.cinematica.models.dto.OrderDto;
 import kg.mega.cinematica.service.OrderService;
@@ -25,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto findById(Long id) {
-        return mapper.toDto(rep.findById(id).orElseThrow(() -> new RuntimeException("Order not found!")));
+        return mapper.toDto(rep.findById(id).orElseThrow(() -> new OrderNotFoundException("Order not found!")));
     }
 
     @Override

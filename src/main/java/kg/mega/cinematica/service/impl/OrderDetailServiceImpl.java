@@ -1,6 +1,7 @@
 package kg.mega.cinematica.service.impl;
 
 import kg.mega.cinematica.dao.OrderDetailRep;
+import kg.mega.cinematica.exceptions.OrderDetailNotFoundException;
 import kg.mega.cinematica.mappers.OrderDetailMapper;
 import kg.mega.cinematica.models.dto.OrderDetailDto;
 import kg.mega.cinematica.service.OrderDetailService;
@@ -24,7 +25,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
     @Override
     public OrderDetailDto findById(Long id) {
-        return mapper.toDto(rep.findById(id).orElseThrow(()->new RuntimeException("Order detail not found!")));
+        return mapper.toDto(rep.findById(id).orElseThrow(()->new OrderDetailNotFoundException("Order detail not found!")));
     }
 
     @Override

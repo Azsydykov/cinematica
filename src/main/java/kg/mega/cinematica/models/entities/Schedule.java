@@ -13,16 +13,10 @@ import java.time.LocalTime;
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "tb_schedule")
-public class Schedule extends WorkDate{
+public class Schedule extends WorkDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    boolean active;
+
     LocalTime startDate;
-
-    @PrePersist
-    protected void onCreate() {
-        active = true;
-    }
-
 }

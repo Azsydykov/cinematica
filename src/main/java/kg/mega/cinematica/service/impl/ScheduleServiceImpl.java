@@ -1,11 +1,14 @@
 package kg.mega.cinematica.service.impl;
 
 import kg.mega.cinematica.dao.ScheduleRep;
+import kg.mega.cinematica.exceptions.ScheduleNotFoundException;
 import kg.mega.cinematica.mappers.ScheduleMapper;
 import kg.mega.cinematica.models.dto.ScheduleDto;
 import kg.mega.cinematica.service.ScheduleService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
@@ -23,7 +26,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public ScheduleDto findById(Long id) {
-        return mapper.toDto(rep.findById(id).orElseThrow(()->new RuntimeException("Schedule not found!")));
+        return mapper.toDto(rep.findById(id).orElseThrow(()->new ScheduleNotFoundException("Schedule not found!")));
     }
 
     @Override
@@ -36,5 +39,14 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public List<ScheduleDto> findAll() {
         return mapper.toDtos(rep.findAll());
+    }
+
+    @Override
+    public ScheduleDto create(LocalTime startDate) {
+        ScheduleDto scheduleDto = new ScheduleDto();
+        scheduleDto.setStartDate(startDate);
+        scheduleDto.setAddDate(new Date());
+        scheduleDto.setUpdateDate(new Date());
+        return save(scheduleDto);
     }
 }

@@ -35,8 +35,8 @@ public class OrderDetailController {
     ResponseEntity<?> findById(@RequestParam Long id) {
 
         return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
-
     }
+
     @GetMapping("/findAll")
     @ApiOperation("Вывод всех деталей брони")
     ResponseEntity<List<OrderDetailDto>> findAll() {
@@ -46,11 +46,8 @@ public class OrderDetailController {
     @DeleteMapping("/delete")
     @ApiOperation("Удаление")
     ResponseEntity<?> delete(@RequestParam Long id) {
-        try {
+
             return ResponseEntity.ok(service.delete(id));
-        } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
     }
 
 }

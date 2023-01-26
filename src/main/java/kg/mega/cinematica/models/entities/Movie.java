@@ -23,14 +23,8 @@ public class Movie extends WorkDate{
     String definition;
     String name;
     Double rating;
-    int pg;
-    boolean active;
+    String pg;
     String image;
-
-    @PrePersist
-    protected void onCreate() {
-        active = true;
-    }
 
 
 }

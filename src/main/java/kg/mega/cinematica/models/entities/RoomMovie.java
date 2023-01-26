@@ -25,11 +25,7 @@ public class RoomMovie extends WorkDate{
     Schedule schedule;
     @ManyToOne
     Price price;
-    boolean active;
 
-    protected void onCreate() {
-        active = true;
-    }
 
 
 

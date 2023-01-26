@@ -45,10 +45,7 @@ public class SeatController {
     @DeleteMapping("/delete")
     @ApiOperation("Удаление")
     ResponseEntity<?> delete(@RequestParam Long id) {
-        try {
             return ResponseEntity.ok(service.delete(id));
-        } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
     }
+
 }

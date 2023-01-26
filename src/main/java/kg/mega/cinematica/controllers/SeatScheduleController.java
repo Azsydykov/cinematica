@@ -32,10 +32,9 @@ public class SeatScheduleController {
     @GetMapping("/findById")
     @ApiOperation("Поиск seatSchedule по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
-
         return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
-
     }
+
     @GetMapping("/findAll")
     @ApiOperation("Вывод всех seatSchedule")
     ResponseEntity<List<SeatScheduleDto>> findAll() {
@@ -45,11 +44,7 @@ public class SeatScheduleController {
     @DeleteMapping("/delete")
     @ApiOperation("Удаление")
     ResponseEntity<?> delete(@RequestParam Long id) {
-        try {
-            return ResponseEntity.ok(service.delete(id));
-        } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+        return ResponseEntity.ok(service.delete(id));
     }
 
 }

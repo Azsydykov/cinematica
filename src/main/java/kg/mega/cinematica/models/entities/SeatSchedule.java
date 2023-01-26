@@ -23,19 +23,5 @@ public class SeatSchedule extends WorkDate{
     RoomMovie roomMovie;
     @Enumerated(EnumType.STRING)
     SeatStatus seatStatus;
-    boolean active;
-
-
-
-    @PrePersist
-    protected void onCreate() {
-        seatStatus = SeatStatus.FREE;
-    }
-
-
-
-
-
-
 
 }

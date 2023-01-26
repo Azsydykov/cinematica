@@ -32,7 +32,7 @@ public class RoomController {
 
     @PostMapping("/create")
     @ApiOperation("Создать")
-    ResponseEntity<?>create(@ModelAttribute SaveRoomRequest room){
+    ResponseEntity<?> create(@ModelAttribute SaveRoomRequest room) {
         try {
             return new ResponseEntity<>(service.create(room), HttpStatus.CREATED);
         } catch (Exception e) {
@@ -43,10 +43,9 @@ public class RoomController {
     @GetMapping("/findById")
     @ApiOperation("Поиск зала по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
-
         return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
-
     }
+
     @GetMapping("/findAll")
     @ApiOperation("Вывод всех залов")
     ResponseEntity<List<RoomDto>> findAll() {
@@ -56,10 +55,8 @@ public class RoomController {
     @DeleteMapping("/delete")
     @ApiOperation("Удаление")
     ResponseEntity<?> delete(@RequestParam Long id) {
-        try {
-            return ResponseEntity.ok(service.delete(id));
-        } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+
+        return ResponseEntity.ok(service.delete(id));
+
     }
 }

@@ -1,6 +1,8 @@
 package kg.mega.cinematica.models.dto;
 //
 //import kg.mega.cinematica.models.entities.User;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kg.mega.cinematica.models.entities.WorkDate;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,10 +16,9 @@ import java.time.LocalTime;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderDto extends WorkDateDto {
-
+    @JsonIgnore
     Long id;
     int price;
     LocalTime startTime;
-//    UserDto userId;
-boolean active;
+
 }

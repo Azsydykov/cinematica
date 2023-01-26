@@ -10,14 +10,12 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CinemaDto extends WorkDateDto{
-
+    @JsonIgnore
     Long id;
     String name;
     String address;
-    // MultipartFile logo;
-    @JsonIgnore
-    boolean active;
     String logo;
+
 
 
 

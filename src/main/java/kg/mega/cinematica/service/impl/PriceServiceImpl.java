@@ -1,11 +1,14 @@
 package kg.mega.cinematica.service.impl;
 
 import kg.mega.cinematica.dao.PriceRep;
+import kg.mega.cinematica.exceptions.PriceNotFoundException;
 import kg.mega.cinematica.mappers.PriceMapper;
 import kg.mega.cinematica.models.dto.PriceDto;
+import kg.mega.cinematica.models.request.SavePriceRequest;
 import kg.mega.cinematica.service.PriceService;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 @Service
 public class PriceServiceImpl implements PriceService {
@@ -24,8 +27,17 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
+    public PriceDto create(SavePriceRequest price) {
+        PriceDto priceDto = new PriceDto();
+        priceDto.setPrice(price.getPrice());
+        priceDto.setPriceType(price.getPriceType());
+
+        return save(priceDto);
+    }
+
+    @Override
     public PriceDto findById(Long id) {
-        return mapper.toDto(rep.findById(id).orElseThrow(()->new RuntimeException("Price not found!")));
+        return mapper.toDto(rep.findById(id).orElseThrow(()->new PriceNotFoundException("Price not found!")));
     }
 
     @Override
