@@ -25,6 +25,13 @@ public class SeatScheduleController {
             return new ResponseEntity<>(service.save(seatScheduleDto), HttpStatus.CREATED);
     }
 
+    @PostMapping("/create")
+    @ApiOperation("Создание")
+    ResponseEntity<?> create(@RequestParam Long roomMovieId,
+                             @RequestParam List<Long> seatsId) {
+        return new ResponseEntity<>(service.create(roomMovieId,seatsId), HttpStatus.CREATED);
+    }
+
     @GetMapping("/findById")
     @ApiOperation("Поиск seatSchedule по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
