@@ -41,7 +41,7 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public SeatDto findById(Long id) {
-        return mapper.toDto(rep.findById(id).orElseThrow(()->new SeatNotFoundException("Seat nor found!")));
+        return mapper.toDto(rep.findById(id).orElseThrow(()->new SeatNotFoundException("Seat not found!")));
     }
 
     @Override

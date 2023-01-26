@@ -3,6 +3,7 @@ package kg.mega.cinematica.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kg.mega.cinematica.models.dto.RoomMovieDto;
+import kg.mega.cinematica.models.request.SaveRoomMovieRequest;
 import kg.mega.cinematica.service.RoomMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,13 @@ public class RoomMovieController {
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody RoomMovieDto roomMovieDto) {
             return new ResponseEntity<>(service.save(roomMovieDto), HttpStatus.CREATED);
+
+    }
+
+    @PostMapping("/create")
+    @ApiOperation("Создание")
+    ResponseEntity<?> create(@ModelAttribute SaveRoomMovieRequest roomMovie, @RequestParam List<Long> prices) {
+        return new ResponseEntity<>(service.create(roomMovie,prices), HttpStatus.CREATED);
 
     }
 
