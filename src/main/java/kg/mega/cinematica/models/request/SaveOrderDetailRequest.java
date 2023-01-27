@@ -5,14 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SaveScheduleRequest {
-    LocalDateTime startDate;
-
+public class SaveOrderDetailRequest {
+    Long seatScheduleId;
+    Long orderId;
 }

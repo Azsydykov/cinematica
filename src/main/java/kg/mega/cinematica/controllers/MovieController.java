@@ -37,7 +37,7 @@ public class MovieController {
     @GetMapping("/findById")
     @ApiOperation("Поиск фильма по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
-        return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
+        return  ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/findAll")

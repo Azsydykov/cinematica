@@ -18,7 +18,7 @@ public class OrderDetail extends WorkDate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @ManyToOne
-    SeatSchedule schedule;
+    SeatSchedule seatSchedule;
     @ManyToOne
     Order order;
 

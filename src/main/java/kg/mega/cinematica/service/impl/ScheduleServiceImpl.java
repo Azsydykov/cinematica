@@ -47,10 +47,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public ScheduleDto create(LocalTime startTime, LocalDate startDay) {
+    public ScheduleDto create(LocalDateTime startDate) {
         ScheduleDto scheduleDto = new ScheduleDto();
-        scheduleDto.setStartTime(startTime);
-        scheduleDto.setStartDay(startDay);
+        scheduleDto.setStartDate(startDate);
         return save(scheduleDto);
     }
 }

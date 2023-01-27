@@ -35,7 +35,7 @@ public class SeatScheduleController {
     @GetMapping("/findById")
     @ApiOperation("Поиск seatSchedule по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
-        return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
+        return  ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/findAll")

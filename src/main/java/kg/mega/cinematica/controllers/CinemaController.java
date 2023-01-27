@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -36,9 +35,9 @@ public class CinemaController {
     }
 
     @GetMapping("/findById")
-    @ApiOperation("Поиск кинотеатра по id")
+    @ApiOperation(value = "Поиск кинотеатра по id",notes = "Возвращает кинотеатр по его Id")
     ResponseEntity<?> findById(@RequestParam Long id) {
-        return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
+        return  ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/findAll")

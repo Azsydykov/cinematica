@@ -1,11 +1,10 @@
 package kg.mega.cinematica.models.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -18,22 +17,22 @@ public class WorkDate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JoinColumn(name = "add_date")
-    Date addDate;
+    LocalDateTime addDate;
     @JoinColumn(name = "update_date")
-    Date updateDate;
+    LocalDateTime updateDate;
     boolean active;
 
 
     @PrePersist
     protected void onCreate() {
-        addDate = new Date();
-        updateDate = new Date();
+        addDate = LocalDateTime.now();
+        updateDate = LocalDateTime.now();
         active=true;
     }
 
     @PreUpdate
     protected void onUpdate() {
-        updateDate = new Date();
+        updateDate = LocalDateTime.now();
     }
 
 

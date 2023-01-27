@@ -4,6 +4,7 @@ package kg.mega.cinematica.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kg.mega.cinematica.models.dto.OrderDetailDto;
+import kg.mega.cinematica.models.request.SaveOrderDetailRequest;
 import kg.mega.cinematica.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(tags = "OrderDetail")
+@Api(tags = "ДеталиБронирования/Покупки")
 @RestController
 @RequestMapping("/api/v1/orderDetail")
 public class OrderDetailController {
@@ -26,11 +27,17 @@ public class OrderDetailController {
             return new ResponseEntity<>(service.save(orderDetailDto), HttpStatus.CREATED);
     }
 
+    @PostMapping("/create")
+    @ApiOperation("Создание")
+    ResponseEntity<?> create(@RequestParam Long orderId, @RequestParam List<Long> seatSchedule) {
+        return new ResponseEntity<>(service.create(orderId,seatSchedule), HttpStatus.CREATED);
+    }
+
     @GetMapping("/findById")
     @ApiOperation("Поиск деталей брони по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
 
-        return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
+        return  ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/findAll")

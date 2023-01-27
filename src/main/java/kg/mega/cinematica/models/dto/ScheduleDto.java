@@ -17,7 +17,7 @@ import java.time.LocalTime;
 public class ScheduleDto extends WorkDateDto {
     @JsonIgnore
     Long id;
-    LocalTime startTime;
-    LocalDate startDay;
+    LocalDateTime startDate;
+
 
 }

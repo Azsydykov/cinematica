@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Getter
@@ -18,7 +19,7 @@ import java.time.LocalTime;
 public class OrderDto extends WorkDateDto {
     @JsonIgnore
     Long id;
-    int price;
-    LocalTime startTime;
+    Double price;
+    LocalDateTime startDate;
 
 }

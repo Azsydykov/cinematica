@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Getter
@@ -18,7 +19,12 @@ public class Order extends WorkDate{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    int price;
-    LocalTime startTime;
+    Double price;
+    LocalDateTime startDate;
+
+    @PrePersist
+    protected void onCreateOrderDate() {
+        startDate = LocalDateTime.now();
+    }
 
 }

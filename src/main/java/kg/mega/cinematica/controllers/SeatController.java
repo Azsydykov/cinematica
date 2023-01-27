@@ -37,8 +37,8 @@ public class SeatController {
     @GetMapping("/findById")
     @ApiOperation("Поиск места по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
-
-        return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
+        return  ResponseEntity.ok(service.findById(id));
+        //      return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
 
     }
     @GetMapping("/findAll")

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(tags = "Order")
+@Api(tags = "Бронь/Покупка")
 @RestController
 @RequestMapping("/api/v1/order")
 public class OrderController {
@@ -29,7 +29,7 @@ public class OrderController {
     @GetMapping("/findById")
     @ApiOperation("Поиск брони по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
-        return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
+        return  ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/findAll")

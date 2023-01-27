@@ -33,17 +33,17 @@ public class ScheduleController {
 
     @PostMapping("/create")
     @ApiOperation("Создание")
-    ResponseEntity<?> create(@RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime startTime,
-                             @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDay) {
+    ResponseEntity<?> create(@RequestParam(defaultValue = "yyyy-MM-dd HH:mm")
+                             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime startDate) {
 
-            return new ResponseEntity<>(service.create(startTime,startDay), HttpStatus.CREATED);
+            return new ResponseEntity<>(service.create(startDate), HttpStatus.CREATED);
 
     }
 
     @GetMapping("/findById")
     @ApiOperation("Поиск расписания по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
-        return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
+        return  ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/findAll")

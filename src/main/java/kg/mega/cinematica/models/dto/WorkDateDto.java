@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.MappedSuperclass;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -15,9 +16,9 @@ import java.util.Date;
 @MappedSuperclass
 public  class WorkDateDto {
     @JsonIgnore
-    Date addDate;
+    LocalDateTime addDate;
     @JsonIgnore
-    Date updateDate;
+    LocalDateTime updateDate;
     @JsonIgnore
     boolean active;
 

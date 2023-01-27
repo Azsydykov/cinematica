@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(tags = "RoomMovie")
+@Api(tags = "ЗалФильм")
 @RestController
 @RequestMapping("/api/v1/roomMovie")
 public class RoomMovieController {
@@ -30,15 +30,15 @@ public class RoomMovieController {
 
     @PostMapping("/create")
     @ApiOperation("Создание")
-    ResponseEntity<?> create(@ModelAttribute SaveRoomMovieRequest roomMovie, @RequestParam List<Long> prices) {
-        return new ResponseEntity<>(service.create(roomMovie,prices), HttpStatus.CREATED);
+    ResponseEntity<?> create(@ModelAttribute SaveRoomMovieRequest roomMovie, @RequestParam List<Long> priceId) {
+        return new ResponseEntity<>(service.create(roomMovie,priceId), HttpStatus.CREATED);
 
     }
 
     @GetMapping("/findById")
     @ApiOperation("Поиск по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
-        return new ResponseEntity<>(service.findById(id), HttpStatus.FOUND);
+        return  ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/findAll")
