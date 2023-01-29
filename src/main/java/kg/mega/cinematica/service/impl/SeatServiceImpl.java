@@ -3,9 +3,11 @@ package kg.mega.cinematica.service.impl;
 import kg.mega.cinematica.dao.SeatRep;
 import kg.mega.cinematica.exceptions.SeatNotFoundException;
 import kg.mega.cinematica.mappers.SeatMapper;
+import kg.mega.cinematica.models.dto.PriceDto;
 import kg.mega.cinematica.models.dto.RoomDto;
 import kg.mega.cinematica.models.dto.SeatDto;
 import kg.mega.cinematica.models.request.SaveSeatRequest;
+import kg.mega.cinematica.service.PriceService;
 import kg.mega.cinematica.service.RoomService;
 import kg.mega.cinematica.service.SeatService;
 import org.springframework.stereotype.Service;
@@ -18,10 +20,12 @@ public class SeatServiceImpl implements SeatService {
 
     private final SeatRep rep;
     private final RoomService roomService;
+    private final PriceService priceService;
 
-    public SeatServiceImpl(SeatRep rep, RoomService roomService) {
+    public SeatServiceImpl(SeatRep rep, RoomService roomService, PriceService priceService) {
         this.rep = rep;
         this.roomService = roomService;
+        this.priceService = priceService;
     }
 
     @Override
@@ -33,9 +37,12 @@ public class SeatServiceImpl implements SeatService {
     public SeatDto book(SaveSeatRequest seat) {
         RoomDto roomDto = roomService.findById(seat.getRoomId());
         SeatDto seatDto = new SeatDto();
-        seatDto.setNumber(seat.getNumber());
-        seatDto.setRow(seat.getRow());
-        seatDto.setRoom(roomDto);
+
+            seatDto.setNumber(seat.getNumber());
+            seatDto.setRow(seat.getRow());
+            seatDto.setRoom(roomDto);
+
+
         return save(seatDto);
     }
 

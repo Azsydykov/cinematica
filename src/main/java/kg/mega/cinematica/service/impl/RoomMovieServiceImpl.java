@@ -41,18 +41,17 @@ public class RoomMovieServiceImpl implements RoomMovieService {
         MovieDto movieDto = movieService.findById(roomMovie.getMovieId());
         RoomDto roomDto = roomService.findById(roomMovie.getRoomId());
         ScheduleDto scheduleDto = scheduleService.findById(roomMovie.getScheduleId());
-
+        RoomMovieDto roomMovieDto = new RoomMovieDto();
         for (Long id : priceDtoList) {
             PriceDto priceDto = priceService.findById(id);
 
-            RoomMovieDto roomMovieDto = new RoomMovieDto();
             roomMovieDto.setMovie(movieDto);
             roomMovieDto.setRoom(roomDto);
             roomMovieDto.setSchedule(scheduleDto);
             roomMovieDto.setPrice(priceDto);
             save(roomMovieDto);
         }
-        return new Responce("Success");
+        return new Responce("Success!");
     }
 
     @Override

@@ -4,16 +4,19 @@ import kg.mega.cinematica.dao.SeatScheduleRep;
 import kg.mega.cinematica.enums.SeatStatus;
 import kg.mega.cinematica.exceptions.SeatScheduleNotFoundException;
 import kg.mega.cinematica.mappers.SeatScheduleMapper;
+import kg.mega.cinematica.models.dto.OrderDto;
 import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.dto.SeatDto;
 import kg.mega.cinematica.models.dto.SeatScheduleDto;
 import kg.mega.cinematica.models.responces.Responce;
+import kg.mega.cinematica.service.OrderService;
 import kg.mega.cinematica.service.RoomMovieService;
 import kg.mega.cinematica.service.SeatScheduleService;
 import kg.mega.cinematica.service.SeatService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class SeatScheduleServiceImpl implements SeatScheduleService {
     SeatScheduleMapper mapper = SeatScheduleMapper.INSTANCE;
@@ -21,11 +24,15 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
     private final SeatScheduleRep rep;
     private final SeatService seatService;
     private final RoomMovieService roomMovieService;
+    private final OrderService orderService;
 
-    public SeatScheduleServiceImpl(SeatScheduleRep rep, SeatService seatService, RoomMovieService roomMovieService) {
+    public SeatScheduleServiceImpl(SeatScheduleRep rep, SeatService seatService,
+                                   RoomMovieService roomMovieService, OrderService orderService) {
         this.rep = rep;
         this.seatService = seatService;
         this.roomMovieService = roomMovieService;
+        this.orderService = orderService;
+
     }
 
 
@@ -36,7 +43,7 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
 
     @Override
     public SeatScheduleDto findById(Long id) {
-        return mapper.toDto(rep.findById(id).orElseThrow(()->new SeatScheduleNotFoundException("Seat Schedule not found!")));
+        return mapper.toDto(rep.findById(id).orElseThrow(() -> new SeatScheduleNotFoundException("Seat Schedule not found!")));
     }
 
     @Override
@@ -54,16 +61,23 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
     @Override
     public Responce create(Long roomMovieId, List<Long> seatsId) {
         RoomMovieDto roomMovieDto = roomMovieService.findById(roomMovieId);
-
-        for(Long id: seatsId) {
+        double price=0;
+        for (Long id : seatsId) {
             SeatDto seatDto = seatService.findById(id);
 
             SeatScheduleDto seatScheduleDto = new SeatScheduleDto();
             seatScheduleDto.setRoomMovie(roomMovieDto);
             seatScheduleDto.setSeat(seatDto);
-            seatScheduleDto.setSeatStatus(SeatStatus.YOUR_BOOKING);
+            seatScheduleDto.setSeatStatus(SeatStatus.BOOKED);
+
             save(seatScheduleDto);
+           price= roomMovieDto.getPrice().getPrice();
         }
+        OrderDto orderDto = new OrderDto();
+        orderDto.setPrice(price);
+        orderService.save(orderDto);
+
+
         return new Responce("Success");
     }
 }

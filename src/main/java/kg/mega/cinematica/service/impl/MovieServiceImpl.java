@@ -9,7 +9,9 @@ import kg.mega.cinematica.service.MovieService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -53,5 +55,16 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<MovieDto> findAll() {
         return mapper.toDtos(rep.findAll());
+    }
+
+    @Override
+    public Map<String, String> getAllMovie() {
+        List<MovieDto> listMovie = findAll();
+        Map<String, String> movieMap = new HashMap<>();
+
+        for (MovieDto item : listMovie) {
+            movieMap.put(item.getName(), "(" +item.getPg()+ ")");
+        }
+        return movieMap;
     }
 }

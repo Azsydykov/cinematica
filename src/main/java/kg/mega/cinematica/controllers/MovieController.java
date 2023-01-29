@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = "Фильм")
 @RestController
@@ -41,9 +42,15 @@ public class MovieController {
     }
 
     @GetMapping("/findAll")
-    @ApiOperation("Вывод всех фильмов")
+    @ApiOperation("Вывод всех фильмов (json)")
     ResponseEntity<List<MovieDto>> findAll() {
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping("/getAllMovie")
+    @ApiOperation("Вывод всех фильмов")
+    ResponseEntity<Map<String,String>> getAllMovie() {
+        return ResponseEntity.ok(service.getAllMovie());
     }
 
     @DeleteMapping("/delete")

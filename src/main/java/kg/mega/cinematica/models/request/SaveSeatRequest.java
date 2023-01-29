@@ -14,4 +14,5 @@ public class SaveSeatRequest {
     Long roomId;
     int number;
     int row;
+    Long priceId;
 }
