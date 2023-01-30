@@ -10,23 +10,6 @@ import java.util.List;
 public interface RoomMovieRep extends JpaRepository<RoomMovie,Long> {
 
 
-    //    @Query("select DISTINCT c.name as cinema,r.name as room,s.start_date, m.name as movie from tb_room_movie as rm
-    //
-    // INNER JOIN tb_movie as m
-    //	on rm.movie_id=m."id"
-    //
-    //	INNER JOIN tb_room as r
-    //	on rm.room_id=r.id
-    //
-    //	INNER JOIN tb_cinema as c
-    //	on r.cinema_id=c."id"
-    //
-    //	INNER JOIN tb_schedule as s
-    //	on rm.schedule_id=s."id"
-    //
-    //
-    //	WHERE m.id=:movieId")
-
 //
 //        @Query("select c.name,r.name,s.startDate, m.name from RoomMovie as rm\n" +
 //            "\n" +

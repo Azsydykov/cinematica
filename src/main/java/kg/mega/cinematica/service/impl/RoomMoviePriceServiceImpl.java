@@ -1,16 +1,11 @@
 package kg.mega.cinematica.service.impl;
 
-import kg.mega.cinematica.dao.PriceRep;
 import kg.mega.cinematica.dao.RoomMoviePriceRep;
-import kg.mega.cinematica.exceptions.PriceNotFoundException;
-import kg.mega.cinematica.mappers.PriceMapper;
+import kg.mega.cinematica.exceptions.RoomMoviePriceNotFoundException;
 import kg.mega.cinematica.mappers.RoomMoviePriceMapper;
 import kg.mega.cinematica.models.dto.PriceDto;
 import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.dto.RoomMoviePriceDto;
-import kg.mega.cinematica.models.request.SavePriceRequest;
-import kg.mega.cinematica.models.request.SaveRoomMoviePriceRequest;
-import kg.mega.cinematica.models.request.SaveRoomMovieRequest;
 import kg.mega.cinematica.models.responces.Responce;
 import kg.mega.cinematica.service.PriceService;
 import kg.mega.cinematica.service.RoomMoviePriceService;
@@ -23,7 +18,6 @@ import java.util.List;
 public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
 
     RoomMoviePriceMapper mapper = RoomMoviePriceMapper.INSTANCE;
-
 
     private final RoomMoviePriceRep rep;
     private final RoomMovieService roomMovieService;
@@ -58,7 +52,7 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
 
     @Override
     public RoomMoviePriceDto findById(Long id) {
-        return mapper.toDto(rep.findById(id).orElseThrow(()->new PriceNotFoundException("RoomMoviePrice not found!")));
+        return mapper.toDto(rep.findById(id).orElseThrow(()->new RoomMoviePriceNotFoundException("RoomMoviePrice not found!")));
     }
 
     @Override
