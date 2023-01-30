@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kg.mega.cinematica.models.dto.MovieDto;
 import kg.mega.cinematica.models.request.SaveMovieRequest;
-import kg.mega.cinematica.models.responces.GetAllMovieResponce;
 import kg.mega.cinematica.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Api(tags = "Фильм")
 @RestController

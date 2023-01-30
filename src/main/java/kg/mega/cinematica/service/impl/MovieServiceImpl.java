@@ -4,17 +4,12 @@ import kg.mega.cinematica.dao.MovieRep;
 import kg.mega.cinematica.exceptions.MovieNotFoundException;
 import kg.mega.cinematica.mappers.MovieMapper;
 import kg.mega.cinematica.models.dto.MovieDto;
-import kg.mega.cinematica.models.entities.Movie;
 import kg.mega.cinematica.models.request.SaveMovieRequest;
-import kg.mega.cinematica.models.responces.GetAllMovieResponce;
-import kg.mega.cinematica.models.responces.Responce;
 import kg.mega.cinematica.service.MovieService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -79,8 +74,6 @@ public class MovieServiceImpl implements MovieService {
         for (MovieDto item:movieList){
             allMovieList.add("ID="+item.getId()+", "+item.getName()+", "+item.getImage()+ ", " +item.getPg());
         }
-
-
         return allMovieList;
     }
 }
