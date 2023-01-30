@@ -5,6 +5,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kg.mega.cinematica.models.dto.OrderDetailDto;
 import kg.mega.cinematica.models.request.SaveOrderDetailRequest;
+import kg.mega.cinematica.models.request.SaveOrderRequest;
+import kg.mega.cinematica.models.request.SaveRoomMovieRequest;
 import kg.mega.cinematica.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +33,12 @@ public class OrderDetailController {
     @ApiOperation("Создание")
     ResponseEntity<?> create(@RequestParam Long orderId, @RequestParam List<Long> seatSchedule) {
         return new ResponseEntity<>(service.create(orderId,seatSchedule), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/create1")
+    @ApiOperation("Создание")
+    ResponseEntity<?> create1(@ModelAttribute SaveOrderRequest order) {
+        return new ResponseEntity<>(service.create1(order), HttpStatus.CREATED);
     }
 
     @GetMapping("/findById")

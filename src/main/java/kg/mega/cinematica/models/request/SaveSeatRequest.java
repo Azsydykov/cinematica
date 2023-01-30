@@ -1,6 +1,5 @@
 package kg.mega.cinematica.models.request;
 
-import kg.mega.cinematica.models.dto.RoomDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,5 +13,5 @@ public class SaveSeatRequest {
     Long roomId;
     int number;
     int row;
-    Long priceId;
+
 }

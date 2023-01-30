@@ -5,9 +5,11 @@ import kg.mega.cinematica.exceptions.SeatNotFoundException;
 import kg.mega.cinematica.mappers.SeatMapper;
 import kg.mega.cinematica.models.dto.PriceDto;
 import kg.mega.cinematica.models.dto.RoomDto;
+import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.dto.SeatDto;
 import kg.mega.cinematica.models.request.SaveSeatRequest;
 import kg.mega.cinematica.service.PriceService;
+import kg.mega.cinematica.service.RoomMovieService;
 import kg.mega.cinematica.service.RoomService;
 import kg.mega.cinematica.service.SeatService;
 import org.springframework.stereotype.Service;
@@ -20,12 +22,14 @@ public class SeatServiceImpl implements SeatService {
 
     private final SeatRep rep;
     private final RoomService roomService;
+    private final RoomMovieService roomMovieService;
     private final PriceService priceService;
 
-    public SeatServiceImpl(SeatRep rep, RoomService roomService, PriceService priceService) {
+    public SeatServiceImpl(SeatRep rep, RoomService roomService, PriceService priceService, RoomMovieService roomMovieService) {
         this.rep = rep;
         this.roomService = roomService;
         this.priceService = priceService;
+        this.roomMovieService = roomMovieService;
     }
 
     @Override
@@ -36,11 +40,14 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public SeatDto book(SaveSeatRequest seat) {
         RoomDto roomDto = roomService.findById(seat.getRoomId());
+
+        //как найти ID именно того созданного roomMoviе?
+        List<SeatDto> seatList = findAll();
         SeatDto seatDto = new SeatDto();
 
-            seatDto.setNumber(seat.getNumber());
-            seatDto.setRow(seat.getRow());
-            seatDto.setRoom(roomDto);
+        seatDto.setNumber(seat.getNumber());
+        seatDto.setRow(seat.getRow());
+        seatDto.setRoom(roomDto);
 
 
         return save(seatDto);
@@ -48,7 +55,7 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public SeatDto findById(Long id) {
-        return mapper.toDto(rep.findById(id).orElseThrow(()->new SeatNotFoundException("Seat not found!")));
+        return mapper.toDto(rep.findById(id).orElseThrow(() -> new SeatNotFoundException("Seat not found!")));
     }
 
     @Override

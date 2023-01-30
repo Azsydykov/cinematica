@@ -9,4 +9,8 @@ public interface MovieService extends BaseService<MovieDto>{
     MovieDto create(SaveMovieRequest movie);
 
     Map<String,String> getAllMovie();
+
+
+
+
 }

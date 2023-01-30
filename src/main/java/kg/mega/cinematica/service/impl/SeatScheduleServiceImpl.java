@@ -4,7 +4,6 @@ import kg.mega.cinematica.dao.SeatScheduleRep;
 import kg.mega.cinematica.enums.SeatStatus;
 import kg.mega.cinematica.exceptions.SeatScheduleNotFoundException;
 import kg.mega.cinematica.mappers.SeatScheduleMapper;
-import kg.mega.cinematica.models.dto.OrderDto;
 import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.dto.SeatDto;
 import kg.mega.cinematica.models.dto.SeatScheduleDto;
@@ -14,10 +13,13 @@ import kg.mega.cinematica.service.RoomMovieService;
 import kg.mega.cinematica.service.SeatScheduleService;
 import kg.mega.cinematica.service.SeatService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+
 public class SeatScheduleServiceImpl implements SeatScheduleService {
     SeatScheduleMapper mapper = SeatScheduleMapper.INSTANCE;
 
@@ -61,23 +63,41 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
     @Override
     public Responce create(Long roomMovieId, List<Long> seatsId) {
         RoomMovieDto roomMovieDto = roomMovieService.findById(roomMovieId);
-        double price=0;
+
+
         for (Long id : seatsId) {
             SeatDto seatDto = seatService.findById(id);
-
             SeatScheduleDto seatScheduleDto = new SeatScheduleDto();
+
             seatScheduleDto.setRoomMovie(roomMovieDto);
             seatScheduleDto.setSeat(seatDto);
             seatScheduleDto.setSeatStatus(SeatStatus.BOOKED);
-
             save(seatScheduleDto);
-           price= roomMovieDto.getPrice().getPrice();
         }
-        OrderDto orderDto = new OrderDto();
-        orderDto.setPrice(price);
-        orderService.save(orderDto);
-
-
-        return new Responce("Success");
+        return new Responce("Saved successfully");
     }
+
+
+//    @Override
+//    public Responce create(Long roomMovieId, List<Long> seatsId) {
+//        RoomMovieDto roomMovieDto = roomMovieService.findById(roomMovieId);
+//        double price=0;
+//
+//        for (Long id : seatsId) {
+//            SeatDto seatDto = seatService.findById(id);
+//            SeatScheduleDto seatScheduleDto = new SeatScheduleDto();
+//
+//            seatScheduleDto.setRoomMovie(roomMovieDto);
+//            seatScheduleDto.setSeat(seatDto);
+//            seatScheduleDto.setSeatStatus(SeatStatus.BOOKED);
+//
+//            save(seatScheduleDto);
+//            price= roomMovieDto.getPrice().getPrice();
+//            OrderDto orderDto = new OrderDto();
+//            orderDto.setPrice(price);
+//            orderService.save(orderDto);
+//
+//        }
+//        return new Responce("Saved successfully");
+//    }
 }

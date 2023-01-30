@@ -8,7 +8,6 @@ import kg.mega.cinematica.models.request.SaveMovieRequest;
 import kg.mega.cinematica.service.MovieService;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,4 +66,5 @@ public class MovieServiceImpl implements MovieService {
         }
         return movieMap;
     }
+
 }

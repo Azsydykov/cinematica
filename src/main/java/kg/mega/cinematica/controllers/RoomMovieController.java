@@ -52,4 +52,10 @@ public class RoomMovieController {
     ResponseEntity<?> delete(@RequestParam Long id) {
         return ResponseEntity.ok(service.delete(id));
     }
+
+    @GetMapping("/getRoomMovieByMovieId")
+    @ApiOperation("Вывод сеанса по id фильма")
+    ResponseEntity<List<String>> getAllByMovieId(@RequestParam Long movieId) {
+        return ResponseEntity.ok(service.getRoomMovieByMovieId(movieId));
+    }
 }

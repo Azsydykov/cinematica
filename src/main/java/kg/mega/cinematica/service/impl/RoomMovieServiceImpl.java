@@ -7,8 +7,14 @@ import kg.mega.cinematica.models.dto.*;
 import kg.mega.cinematica.models.request.SaveRoomMovieRequest;
 import kg.mega.cinematica.models.responces.Responce;
 import kg.mega.cinematica.service.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -51,7 +57,7 @@ public class RoomMovieServiceImpl implements RoomMovieService {
             roomMovieDto.setPrice(priceDto);
             save(roomMovieDto);
         }
-        return new Responce("Success!");
+        return new Responce("Saved successfully!");
     }
 
     @Override
@@ -67,7 +73,27 @@ public class RoomMovieServiceImpl implements RoomMovieService {
     }
 
     @Override
+    public List<RoomMovieDto> getAllByMovieId(Long movieId) {
+        return mapper.toDtos(rep.getAllByMovieId(movieId));
+    }
+
+    @Override
     public List<RoomMovieDto> findAll() {
         return mapper.toDtos(rep.findAll());
+    }
+
+
+    @Override
+    public List<String> getRoomMovieByMovieId(Long masterId) {
+        List<RoomMovieDto> roomMovieList = getAllByMovieId(masterId);
+        List<String> schedulelist = new ArrayList<>();
+
+        for (RoomMovieDto item : roomMovieList) {
+            schedulelist.add(item.getRoom().getCinema().getName()+"/ "+
+                             item.getRoom().getName()+"/ "+
+                             item.getMovie().getName()+"/ "+
+                             item.getSchedule().getStartDate());
+        }
+        return schedulelist;
     }
 }

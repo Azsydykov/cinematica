@@ -59,4 +59,5 @@ public class MovieController {
             return ResponseEntity.ok(service.delete(id));
 
     }
+
 }
