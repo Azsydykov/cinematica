@@ -11,19 +11,16 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "tb_room_movie")
-public class RoomMovie extends WorkDate{
+@Table(name = "tb_room_movie_price")
+public class RoomMoviePrice extends WorkDate{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @ManyToOne
-    Room room;
+    RoomMovie roomMovie;
     @ManyToOne
-    Movie movie;
-    @ManyToOne
-    Schedule schedule;
-
+    Price price;
 
 
 

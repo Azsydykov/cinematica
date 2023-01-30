@@ -1,16 +1,14 @@
-package kg.mega.cinematica.models.responces;
+package kg.mega.cinematica.models.request;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
-
-@Setter
 @Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoomResponce {
-    String name;
-    List<RoomMovieResponce> roomMovie;
+public class SaveRoomMoviePriceRequest {
+    Long roomMovieId;
+    Long priceId;
 }

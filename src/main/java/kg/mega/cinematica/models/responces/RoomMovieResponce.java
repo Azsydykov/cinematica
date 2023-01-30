@@ -1,6 +1,5 @@
 package kg.mega.cinematica.models.responces;
 
-import kg.mega.cinematica.enums.PriceType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,8 +12,8 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoomMovieResponce {
     Long id;
-    PriceType priceType;
-    Double price;
+    Double childPrice;
+    Double standartPrice;
     LocalDateTime startDate;
 
 }

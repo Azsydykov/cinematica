@@ -5,6 +5,7 @@ import kg.mega.cinematica.exceptions.RoomMovieNotFoundException;
 import kg.mega.cinematica.mappers.RoomMovieMapper;
 import kg.mega.cinematica.models.dto.*;
 import kg.mega.cinematica.models.request.SaveRoomMovieRequest;
+import kg.mega.cinematica.models.responces.GetRoomMovieResponse;
 import kg.mega.cinematica.models.responces.Responce;
 import kg.mega.cinematica.service.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DateFormat;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,15 +50,12 @@ public class RoomMovieServiceImpl implements RoomMovieService {
         RoomDto roomDto = roomService.findById(roomMovie.getRoomId());
         ScheduleDto scheduleDto = scheduleService.findById(roomMovie.getScheduleId());
         RoomMovieDto roomMovieDto = new RoomMovieDto();
-        for (Long id : priceDtoList) {
-            PriceDto priceDto = priceService.findById(id);
-
             roomMovieDto.setMovie(movieDto);
             roomMovieDto.setRoom(roomDto);
             roomMovieDto.setSchedule(scheduleDto);
-            roomMovieDto.setPrice(priceDto);
+
             save(roomMovieDto);
-        }
+
         return new Responce("Saved successfully!");
     }
 
@@ -84,16 +83,9 @@ public class RoomMovieServiceImpl implements RoomMovieService {
 
 
     @Override
-    public List<String> getRoomMovieByMovieId(Long masterId) {
-        List<RoomMovieDto> roomMovieList = getAllByMovieId(masterId);
-        List<String> schedulelist = new ArrayList<>();
+    public List<GetRoomMovieResponse> getRoomMovieByMovieId(Long movieId, LocalDateTime startDate) {
 
-        for (RoomMovieDto item : roomMovieList) {
-            schedulelist.add(item.getRoom().getCinema().getName()+"/ "+
-                             item.getRoom().getName()+"/ "+
-                             item.getMovie().getName()+"/ "+
-                             item.getSchedule().getStartDate());
-        }
-        return schedulelist;
+
+        return null;
     }
 }
