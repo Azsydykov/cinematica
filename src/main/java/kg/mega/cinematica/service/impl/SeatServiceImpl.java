@@ -8,6 +8,7 @@ import kg.mega.cinematica.models.dto.RoomDto;
 import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.dto.SeatDto;
 import kg.mega.cinematica.models.request.SaveSeatRequest;
+import kg.mega.cinematica.models.responces.Responce;
 import kg.mega.cinematica.service.PriceService;
 import kg.mega.cinematica.service.RoomMovieService;
 import kg.mega.cinematica.service.RoomService;
@@ -38,19 +39,16 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public SeatDto book(SaveSeatRequest seat) {
+    public SeatDto create(SaveSeatRequest seat) {
         RoomDto roomDto = roomService.findById(seat.getRoomId());
 
-        //как найти ID именно того созданного roomMoviе?
-        List<SeatDto> seatList = findAll();
-        SeatDto seatDto = new SeatDto();
-
-        seatDto.setNumber(seat.getNumber());
-        seatDto.setRow(seat.getRow());
-        seatDto.setRoom(roomDto);
+            SeatDto seatDto = new SeatDto();
+            seatDto.setNumber(seat.getNumber());
+            seatDto.setRow(seat.getRow());
+            seatDto.setRoom(roomDto);
+        return  save(seatDto);
 
 
-        return save(seatDto);
     }
 
     @Override

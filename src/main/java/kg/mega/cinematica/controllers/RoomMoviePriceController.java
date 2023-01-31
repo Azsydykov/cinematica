@@ -25,15 +25,14 @@ public class RoomMoviePriceController {
     @PostMapping("/save")
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody RoomMoviePriceDto roomMoviePriceDto) {
-
             return new ResponseEntity<>(service.save(roomMoviePriceDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/create")
     @ApiOperation("Создание")
-    ResponseEntity<?> create(@RequestParam Long roomMovieId, @RequestParam  List<Long> priceList) {
+    ResponseEntity<?> create(@RequestParam Long roomMovieId, @RequestParam  List<Long> priceIdList) {
 
-            return new ResponseEntity<>(service.create(roomMovieId,priceList), HttpStatus.CREATED);
+            return new ResponseEntity<>(service.create(roomMovieId,priceIdList), HttpStatus.CREATED);
     }
 
     @GetMapping("/findById")

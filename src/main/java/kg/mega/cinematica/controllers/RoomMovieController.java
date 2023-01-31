@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Api(tags = "ЗалФильм")
+@Api(tags = "Сеанс")
 @RestController
 @RequestMapping("/api/v1/roomMovie")
 public class RoomMovieController {
@@ -33,8 +33,8 @@ public class RoomMovieController {
 
     @PostMapping("/create")
     @ApiOperation("Создание")
-    ResponseEntity<?> create(@ModelAttribute SaveRoomMovieRequest roomMovie, @RequestParam List<Long> priceId) {
-        return new ResponseEntity<>(service.create(roomMovie,priceId), HttpStatus.CREATED);
+    ResponseEntity<?> create(@ModelAttribute SaveRoomMovieRequest roomMovie) {
+        return new ResponseEntity<>(service.create(roomMovie), HttpStatus.CREATED);
     }
 
     @GetMapping("/findById")
@@ -44,7 +44,7 @@ public class RoomMovieController {
     }
 
     @GetMapping("/findAll")
-    @ApiOperation("Вывод всех")
+    @ApiOperation("Вывод всех сеансов")
     ResponseEntity<List<RoomMovieDto>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }

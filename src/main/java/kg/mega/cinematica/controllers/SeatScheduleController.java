@@ -3,6 +3,7 @@ package kg.mega.cinematica.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kg.mega.cinematica.models.dto.SeatScheduleDto;
+import kg.mega.cinematica.models.responces.SeatScheduleResponce;
 import kg.mega.cinematica.service.SeatScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,12 @@ public class SeatScheduleController {
     @ApiOperation("Удаление")
     ResponseEntity<?> delete(@RequestParam Long id) {
         return ResponseEntity.ok(service.delete(id));
+    }
+
+    @GetMapping("/findByRoomMovieId")
+    @ApiOperation("Поиск по id сеанса")
+    ResponseEntity<List<SeatScheduleResponce>> findByRoomMovieId(@RequestParam Long roomMovieId) {
+        return  ResponseEntity.ok(service.findByRoomMovieId(roomMovieId));
     }
 
 }

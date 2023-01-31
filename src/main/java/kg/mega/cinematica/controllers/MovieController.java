@@ -23,21 +23,19 @@ public class MovieController {
     @PostMapping("/save")
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody MovieDto movieDto) {
-            return new ResponseEntity<>(service.save(movieDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.save(movieDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/create")
     @ApiOperation("Создание")
     ResponseEntity<?> create(@ModelAttribute SaveMovieRequest movie) {
-
-            return new ResponseEntity<>(service.create(movie), HttpStatus.CREATED);
-
+        return new ResponseEntity<>(service.create(movie), HttpStatus.CREATED);
     }
 
     @GetMapping("/findById")
     @ApiOperation("Поиск фильма по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
-        return  ResponseEntity.ok(service.findById(id));
+        return ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/findAll")
@@ -46,22 +44,15 @@ public class MovieController {
         return ResponseEntity.ok(service.findAll());
     }
 
-    @GetMapping("/getAllMovie")
-    @ApiOperation("Вывод всех фильмов")
-    ResponseEntity<List<String>> getAllMovie() {
-        return ResponseEntity.ok(service.getAllMovie());
-    }
-
     @DeleteMapping("/delete")
     @ApiOperation("Удаление")
     ResponseEntity<?> delete(@RequestParam Long id) {
-            return ResponseEntity.ok(service.delete(id));
-
+        return ResponseEntity.ok(service.delete(id));
     }
 
     @GetMapping("/getAllMovies")
     @ApiOperation("Вывод всех фильмов new")
-    ResponseEntity<List<String>> getAllMovies(@RequestParam int limit,@RequestParam int offset) {
+    ResponseEntity<List<String>> getAllMovies(@RequestParam int limit, @RequestParam int offset) {
         return ResponseEntity.ok(service.getAllMovies(limit, offset));
     }
 

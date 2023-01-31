@@ -10,7 +10,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SaveRoomMovieRequest {
     Long movieId;
-    Long priceId;
     Long roomId;
     Long scheduleId;
 }

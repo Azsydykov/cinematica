@@ -27,10 +27,10 @@ public class SeatController {
 
     }
 
-    @PostMapping("/book")
-    @ApiOperation("Забронировать/Купить")
-    ResponseEntity<?> book(@ModelAttribute SaveSeatRequest seat) {
-            return new ResponseEntity<>(service.book(seat), HttpStatus.CREATED);
+    @PostMapping("/create")
+    @ApiOperation("Создать")
+    ResponseEntity<?> create(@ModelAttribute SaveSeatRequest seat) {
+            return new ResponseEntity<>(service.create(seat), HttpStatus.CREATED);
 
     }
 

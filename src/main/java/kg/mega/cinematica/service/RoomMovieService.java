@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface RoomMovieService extends BaseService<RoomMovieDto>{
-    Responce create(SaveRoomMovieRequest roomMovie, List<Long> prices);
+    Responce create(SaveRoomMovieRequest roomMovie);
 
     List<RoomMovieDto> getAllByMovieId(Long id);
 

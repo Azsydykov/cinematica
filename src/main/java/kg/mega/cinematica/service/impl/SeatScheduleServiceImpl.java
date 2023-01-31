@@ -8,14 +8,14 @@ import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.dto.SeatDto;
 import kg.mega.cinematica.models.dto.SeatScheduleDto;
 import kg.mega.cinematica.models.responces.Responce;
+import kg.mega.cinematica.models.responces.SeatScheduleResponce;
 import kg.mega.cinematica.service.OrderService;
 import kg.mega.cinematica.service.RoomMovieService;
 import kg.mega.cinematica.service.SeatScheduleService;
 import kg.mega.cinematica.service.SeatService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -77,27 +77,20 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
         return new Responce("Saved successfully");
     }
 
+    @Override
+    public List<SeatScheduleResponce> findByRoomMovieId(Long roomMovieId) {
+        List<SeatScheduleDto> seatScheduleList = mapper.toDtos(rep.getByRoomMovieId(roomMovieId));
 
-//    @Override
-//    public Responce create(Long roomMovieId, List<Long> seatsId) {
-//        RoomMovieDto roomMovieDto = roomMovieService.findById(roomMovieId);
-//        double price=0;
-//
-//        for (Long id : seatsId) {
-//            SeatDto seatDto = seatService.findById(id);
-//            SeatScheduleDto seatScheduleDto = new SeatScheduleDto();
-//
-//            seatScheduleDto.setRoomMovie(roomMovieDto);
-//            seatScheduleDto.setSeat(seatDto);
-//            seatScheduleDto.setSeatStatus(SeatStatus.BOOKED);
-//
-//            save(seatScheduleDto);
-//            price= roomMovieDto.getPrice().getPrice();
-//            OrderDto orderDto = new OrderDto();
-//            orderDto.setPrice(price);
-//            orderService.save(orderDto);
-//
-//        }
-//        return new Responce("Saved successfully");
-//    }
+        List<SeatScheduleResponce> seatScheduleResList = new ArrayList<>();
+        for (SeatScheduleDto item : seatScheduleList) {
+            SeatScheduleResponce seatScheduleResponce = new SeatScheduleResponce();
+            seatScheduleResponce.setSeatScheduleId(item.getId());
+            seatScheduleResponce.setStatus(item.getSeatStatus());
+            seatScheduleResponce.setRow(item.getSeat().getRow());
+            seatScheduleResponce.setSeatNum(item.getSeat().getNumber());
+            seatScheduleResList.add(seatScheduleResponce);
+        }
+
+        return seatScheduleResList;
+    }
 }

@@ -57,4 +57,6 @@ public class ScheduleController {
     ResponseEntity<?> delete(@RequestParam Long id) {
         return ResponseEntity.ok(service.delete(id));
     }
+
+
 }

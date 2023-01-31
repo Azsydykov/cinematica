@@ -30,4 +30,7 @@ public interface RoomMovieRep extends JpaRepository<RoomMovie,Long> {
 
     @Query(value = "SELECT * from tb_room_movie as rm WHERE rm.movie_id=:movieId",nativeQuery = true)
     List<RoomMovie> getAllByMovieId(Long movieId);
+
+    @Query(value = "",nativeQuery = true)
+    List<RoomMovie> getRoomMovieByMovieId(Long movieId);
 }

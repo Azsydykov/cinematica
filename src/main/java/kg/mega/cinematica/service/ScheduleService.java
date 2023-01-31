@@ -8,4 +8,5 @@ import java.time.LocalTime;
 
 public interface ScheduleService extends BaseService<ScheduleDto>{
     ScheduleDto create(LocalDateTime stardDate);
+
 }

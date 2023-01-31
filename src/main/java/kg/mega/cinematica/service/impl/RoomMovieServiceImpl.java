@@ -45,7 +45,7 @@ public class RoomMovieServiceImpl implements RoomMovieService {
     }
 
     @Override
-    public Responce create(SaveRoomMovieRequest roomMovie, List<Long> priceDtoList) {
+    public Responce create(SaveRoomMovieRequest roomMovie) {
         MovieDto movieDto = movieService.findById(roomMovie.getMovieId());
         RoomDto roomDto = roomService.findById(roomMovie.getRoomId());
         ScheduleDto scheduleDto = scheduleService.findById(roomMovie.getScheduleId());
