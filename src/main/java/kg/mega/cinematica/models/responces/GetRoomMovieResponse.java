@@ -16,7 +16,7 @@ public class GetRoomMovieResponse {
     String movieImage;
     String definition;
     String moviePg;
-    String movieRating;
+    Double movieRating;
     List<CinemaResponse> cinema;
 
 }

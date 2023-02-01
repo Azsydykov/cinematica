@@ -56,10 +56,14 @@ public class MovieServiceImpl implements MovieService {
         return mapper.toDtos(rep.findAll());
     }
 
+    @Override
+    public List<MovieDto> findAllMovies(int limit, int offset) {
+        return mapper.toDtos(rep.findAllMovies(limit,offset));
+    }
 
     @Override
     public List<String> getAllMovies(int limit, int offset) {
-        List<MovieDto> movieList = mapper.toDtos(rep.getAllMovies(limit,offset));
+        List<MovieDto> movieList = findAllMovies(limit,offset);
         List<String> allMovieList = new ArrayList<>();
         for (MovieDto item:movieList){
             allMovieList.add("ID="+item.getId()+", "+item.getName()+", "+item.getImage()+ ", " +item.getPg());

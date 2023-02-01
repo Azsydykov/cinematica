@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoomResponce {
+public class RoomResponse {
     String name;
-    List<RoomMovieResponce> roomMovie;
+    List<RoomMovieResponse> roomMovie;
 }

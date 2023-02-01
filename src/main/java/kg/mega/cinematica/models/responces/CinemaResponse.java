@@ -12,5 +12,5 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CinemaResponse {
     String name;
-    List<RoomResponce> rooms;
+    List<RoomResponse> rooms;
 }

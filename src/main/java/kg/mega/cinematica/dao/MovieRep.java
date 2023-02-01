@@ -10,7 +10,7 @@ import java.util.List;
 public interface MovieRep extends JpaRepository<Movie,Long> {
 
     @Query(value = "select * from tb_movie LIMIT :limit OFFSET :offset",nativeQuery = true)
-    List<Movie> getAllMovies(int limit, int offset);
+    List<Movie> findAllMovies(int limit, int offset);
 
 
 }

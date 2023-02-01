@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SeatScheduleResponce {
+public class SeatScheduleResponse {
     long seatScheduleId;
     SeatStatus status;
     int row;

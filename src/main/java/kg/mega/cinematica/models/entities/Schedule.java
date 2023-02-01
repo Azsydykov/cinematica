@@ -19,5 +19,6 @@ public class Schedule extends WorkDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    LocalDateTime startDate;
+    LocalDate startDay;
+    LocalTime startTime;
 }

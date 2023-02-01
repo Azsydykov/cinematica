@@ -1,4 +1,4 @@
-package kg.mega.cinematica.models.request;
+package kg.mega.cinematica.models.responces;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -9,10 +9,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-@Getter
 @Setter
+@Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SaveScheduleRequest {
-    LocalDateTime startDate;
+public class RoomMovieResponse {
+    Long id;
+    Double childPrice;
+    Double standartPrice;
+    Double studentPrice;
+    LocalTime startTime;
 
 }

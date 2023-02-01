@@ -51,7 +51,7 @@ public class MovieController {
     }
 
     @GetMapping("/getAllMovies")
-    @ApiOperation("Вывод всех фильмов new")
+    @ApiOperation("Вывод всех фильмов")
     ResponseEntity<List<String>> getAllMovies(@RequestParam int limit, @RequestParam int offset) {
         return ResponseEntity.ok(service.getAllMovies(limit, offset));
     }

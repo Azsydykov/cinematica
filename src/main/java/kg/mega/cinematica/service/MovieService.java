@@ -8,6 +8,6 @@ import java.util.List;
 public interface MovieService extends BaseService<MovieDto>{
     MovieDto create(SaveMovieRequest movie);
 
-
+    List<MovieDto> findAllMovies(int limit, int offset);
     List<String> getAllMovies(int limit, int offset);
 }

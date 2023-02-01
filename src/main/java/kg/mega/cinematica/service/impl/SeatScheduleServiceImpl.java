@@ -7,8 +7,8 @@ import kg.mega.cinematica.mappers.SeatScheduleMapper;
 import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.dto.SeatDto;
 import kg.mega.cinematica.models.dto.SeatScheduleDto;
-import kg.mega.cinematica.models.responces.Responce;
-import kg.mega.cinematica.models.responces.SeatScheduleResponce;
+import kg.mega.cinematica.models.responces.Response;
+import kg.mega.cinematica.models.responces.SeatScheduleResponse;
 import kg.mega.cinematica.service.OrderService;
 import kg.mega.cinematica.service.RoomMovieService;
 import kg.mega.cinematica.service.SeatScheduleService;
@@ -61,7 +61,7 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
     }
 
     @Override
-    public Responce create(Long roomMovieId, List<Long> seatsId) {
+    public Response create(Long roomMovieId, List<Long> seatsId) {
         RoomMovieDto roomMovieDto = roomMovieService.findById(roomMovieId);
 
 
@@ -74,23 +74,28 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
             seatScheduleDto.setSeatStatus(SeatStatus.BOOKED);
             save(seatScheduleDto);
         }
-        return new Responce("Saved successfully");
+        return new Response("Saved successfully");
     }
 
     @Override
-    public List<SeatScheduleResponce> findByRoomMovieId(Long roomMovieId) {
-        List<SeatScheduleDto> seatScheduleList = mapper.toDtos(rep.getByRoomMovieId(roomMovieId));
+    public List<SeatScheduleDto> findByRoomMovieId(Long roomMovieId) {
+        return mapper.toDtos(rep.findByRoomMovieId(roomMovieId));
+    }
 
-        List<SeatScheduleResponce> seatScheduleResList = new ArrayList<>();
+
+    @Override
+    public List<SeatScheduleResponse> getByRoomMovieId(Long roomMovieId) {
+        List<SeatScheduleDto> seatScheduleList = findByRoomMovieId(roomMovieId);
+
+        List<SeatScheduleResponse> seatScheduleResList = new ArrayList<>();
         for (SeatScheduleDto item : seatScheduleList) {
-            SeatScheduleResponce seatScheduleResponce = new SeatScheduleResponce();
-            seatScheduleResponce.setSeatScheduleId(item.getId());
-            seatScheduleResponce.setStatus(item.getSeatStatus());
-            seatScheduleResponce.setRow(item.getSeat().getRow());
-            seatScheduleResponce.setSeatNum(item.getSeat().getNumber());
-            seatScheduleResList.add(seatScheduleResponce);
+            SeatScheduleResponse seatScheduleResponse = new SeatScheduleResponse();
+            seatScheduleResponse.setSeatScheduleId(item.getId());
+            seatScheduleResponse.setStatus(item.getSeatStatus());
+            seatScheduleResponse.setRow(item.getSeat().getRow());
+            seatScheduleResponse.setSeatNum(item.getSeat().getNumber());
+            seatScheduleResList.add(seatScheduleResponse);
         }
-
         return seatScheduleResList;
     }
 }

@@ -5,17 +5,12 @@ import kg.mega.cinematica.exceptions.RoomMovieNotFoundException;
 import kg.mega.cinematica.mappers.RoomMovieMapper;
 import kg.mega.cinematica.models.dto.*;
 import kg.mega.cinematica.models.request.SaveRoomMovieRequest;
-import kg.mega.cinematica.models.responces.GetRoomMovieResponse;
-import kg.mega.cinematica.models.responces.Responce;
+import kg.mega.cinematica.models.responces.*;
 import kg.mega.cinematica.service.*;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.text.DateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,20 +18,20 @@ import java.util.List;
 public class RoomMovieServiceImpl implements RoomMovieService {
     RoomMovieMapper mapper = RoomMovieMapper.INSTANCE;
 
+
     private final RoomMovieRep rep;
     private final MovieService movieService;
-    private final PriceService priceService;
     private final RoomService roomService;
     private final ScheduleService scheduleService;
 
     public RoomMovieServiceImpl(RoomMovieRep rep, MovieService movieService,
-                                PriceService priceService, RoomService roomService,
+                                RoomService roomService,
                                 ScheduleService scheduleService) {
         this.rep = rep;
         this.movieService = movieService;
-        this.priceService = priceService;
         this.roomService = roomService;
         this.scheduleService = scheduleService;
+
     }
 
     @Override
@@ -45,18 +40,18 @@ public class RoomMovieServiceImpl implements RoomMovieService {
     }
 
     @Override
-    public Responce create(SaveRoomMovieRequest roomMovie) {
+    public Response create(SaveRoomMovieRequest roomMovie) {
         MovieDto movieDto = movieService.findById(roomMovie.getMovieId());
         RoomDto roomDto = roomService.findById(roomMovie.getRoomId());
         ScheduleDto scheduleDto = scheduleService.findById(roomMovie.getScheduleId());
         RoomMovieDto roomMovieDto = new RoomMovieDto();
-            roomMovieDto.setMovie(movieDto);
-            roomMovieDto.setRoom(roomDto);
-            roomMovieDto.setSchedule(scheduleDto);
+        roomMovieDto.setMovie(movieDto);
+        roomMovieDto.setRoom(roomDto);
+        roomMovieDto.setSchedule(scheduleDto);
 
-            save(roomMovieDto);
+        save(roomMovieDto);
 
-        return new Responce("Saved successfully!");
+        return new Response("Saved successfully!");
     }
 
     @Override
@@ -81,11 +76,9 @@ public class RoomMovieServiceImpl implements RoomMovieService {
         return mapper.toDtos(rep.findAll());
     }
 
-
     @Override
-    public List<GetRoomMovieResponse> getRoomMovieByMovieId(Long movieId, LocalDateTime startDate) {
+    public List<RoomMovieDto> findRoomMovieByMovieId(Long movieId, LocalDate startDay) {
 
-
-        return null;
+        return mapper.toDtos(rep.findRoomMovieByMovieId(movieId, startDay));
     }
 }

@@ -5,15 +5,15 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDateTime;
-
-@Setter
 @Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoomMovieResponce {
-    Long id;
-    Double childPrice;
-    Double standartPrice;
-    LocalDateTime startDate;
+public class Response {
+    String message;
+
+    public Response(String message) {
+        this.message = message;
+    }
+
 
 }

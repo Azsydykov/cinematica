@@ -5,13 +5,17 @@ import io.swagger.annotations.ApiOperation;
 import kg.mega.cinematica.models.dto.PriceDto;
 import kg.mega.cinematica.models.dto.RoomMoviePriceDto;
 import kg.mega.cinematica.models.request.SavePriceRequest;
+import kg.mega.cinematica.models.responces.GetRoomMovieResponse;
 import kg.mega.cinematica.service.PriceService;
 import kg.mega.cinematica.service.RoomMoviePriceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Api(tags = "Цена сеанса")
@@ -51,5 +55,15 @@ public class RoomMoviePriceController {
     @ApiOperation("Удаление")
     ResponseEntity<?> delete(@RequestParam Long id) {
             return ResponseEntity.ok(service.delete(id));
+    }
+
+    @GetMapping("/getRoomMovieByMovieId")
+    @ApiOperation("Вывод сеанса")
+    ResponseEntity<GetRoomMovieResponse> getRoomMovieByMovieId(@RequestParam Long movieId,
+                                                               @RequestParam
+                                                               @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDay) {
+        return ResponseEntity.ok(service.getRoomMovieByMovieId(movieId, startDay));
+
+        //(defaultValue = "yyyy-MM-dd")
     }
 }

@@ -33,10 +33,12 @@ public class ScheduleController {
 
     @PostMapping("/create")
     @ApiOperation("Создание")
-    ResponseEntity<?> create(@RequestParam(defaultValue = "yyyy-MM-dd HH:mm")
-                             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime startDate) {
+    ResponseEntity<?> create(@RequestParam(defaultValue = "dd-MM-yyyy")
+                             @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDay,
+                             @RequestParam(defaultValue = "HH:mm")
+    @DateTimeFormat(pattern = "HH:mm") LocalTime startTime) {
 
-            return new ResponseEntity<>(service.create(startDate), HttpStatus.CREATED);
+            return new ResponseEntity<>(service.create(startDay,startTime), HttpStatus.CREATED);
 
     }
 

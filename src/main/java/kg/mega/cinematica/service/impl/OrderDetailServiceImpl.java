@@ -1,13 +1,11 @@
 package kg.mega.cinematica.service.impl;
 
 import kg.mega.cinematica.dao.OrderDetailRep;
-import kg.mega.cinematica.enums.SeatStatus;
 import kg.mega.cinematica.exceptions.OrderDetailNotFoundException;
 import kg.mega.cinematica.mappers.OrderDetailMapper;
 import kg.mega.cinematica.models.dto.*;
 import kg.mega.cinematica.models.request.SaveOrderRequest;
-import kg.mega.cinematica.models.request.SaveRoomMovieRequest;
-import kg.mega.cinematica.models.responces.Responce;
+import kg.mega.cinematica.models.responces.Response;
 import kg.mega.cinematica.service.*;
 import org.springframework.stereotype.Service;
 
@@ -19,30 +17,13 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     private final OrderDetailRep rep;
     private final OrderService orderService;
     private final SeatScheduleService seatScheduleService;
-    private final MovieService movieService;
-    private final CinemaService cinemaService;
-    private final RoomService roomService;
-    private final ScheduleService scheduleService;
-    private final PriceService priceService;
-    private final SeatService seatService;
-    private final RoomMovieService roomMovieService;
+
 
     public OrderDetailServiceImpl(OrderDetailRep rep, OrderService orderService,
-                                  SeatScheduleService seatScheduleService,
-                                  MovieService movieService, CinemaService cinemaService,
-                                  RoomService roomService, ScheduleService scheduleService,
-                                  PriceService priceService,SeatService seatService,
-                                  RoomMovieService roomMovieService) {
+                                  SeatScheduleService seatScheduleService) {
         this.rep = rep;
         this.orderService = orderService;
         this.seatScheduleService = seatScheduleService;
-        this.movieService = movieService;
-        this.cinemaService = cinemaService;
-        this.roomService = roomService;
-        this.scheduleService = scheduleService;
-        this.priceService = priceService;
-        this.seatService = seatService;
-        this.roomMovieService = roomMovieService;
     }
 
     @Override
@@ -68,7 +49,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
-    public Responce create(Long orderId, List<Long> seatScheduleList) {
+    public Response create(Long orderId, List<Long> seatScheduleList) {
 
         OrderDto orderDto = orderService.findById(orderId);
 
@@ -79,11 +60,11 @@ public class OrderDetailServiceImpl implements OrderDetailService {
             orderDetailDto.setSeatSchedule(seatScheduleDto);
             save(orderDetailDto);
         }
-        return new Responce("Success");
+        return new Response("Success");
     }
 
     @Override
-    public Responce create1(SaveOrderRequest order) {
+    public Response create1(SaveOrderRequest order) {
       return null;
     }
 }
