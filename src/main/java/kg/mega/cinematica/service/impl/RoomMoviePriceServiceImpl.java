@@ -27,6 +27,7 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
     private final RoomMoviePriceRep rep;
     private final RoomMovieService roomMovieService;
     private final PriceService priceService;
+    private PriceType priceType;
 
     public RoomMoviePriceServiceImpl(RoomMoviePriceRep rep, RoomMovieService roomMovieService, PriceService priceService) {
         this.rep = rep;
@@ -85,25 +86,35 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
 
 
         List<RoomMovieResponse> roomMovieResponseList = new ArrayList<>();
-        for (RoomMoviePriceDto item : roomMoviePriceList) {
 
+
+        for (RoomMoviePriceDto item : roomMoviePriceList) {
             RoomMovieResponse roomMovieResponse = new RoomMovieResponse();
             roomMovieResponse.setId(item.getRoomMovie().getId());
-
-            //????????????????????????????????????????????????????????????
-            roomMovieResponse.setChildPrice(item.getPrice().getPrice());
-            roomMovieResponse.setStudentPrice(item.getPrice().getPrice());
-            roomMovieResponse.setStandartPrice(item.getPrice().getPrice());
+            priceType = item.getPrice().getPriceType();
 
 
-            roomMovieResponse.setStartTime(item.getRoomMovie().getSchedule().getStartTime()); //проверить как выведит
+
+            switch (priceType) {
+                case CHILD:
+                    roomMovieResponse.setChildPrice(item.getPrice().getPrice());
+                    break;
+                case STUDENT:
+                    roomMovieResponse.setStudentPrice(item.getPrice().getPrice());
+                    break;
+                case ADULTS:
+                    roomMovieResponse.setStandartPrice(item.getPrice().getPrice());
+                    break;
+            }
+
+
+            roomMovieResponse.setStartTime(item.getRoomMovie().getSchedule().getStartTime());
 
             roomMovieResponseList.add(roomMovieResponse);
         }
 
         List<RoomMovieDto> roomMovieList = roomMovieService.findRoomMovieByMovieId(movieId, startDate);
         List<RoomResponse> roomResponseList = new ArrayList<>();
-
 
 
         for (RoomMovieDto item : roomMovieList) {
