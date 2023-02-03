@@ -4,6 +4,7 @@ import kg.mega.cinematica.dao.SeatScheduleRep;
 import kg.mega.cinematica.enums.SeatStatus;
 import kg.mega.cinematica.exceptions.SeatScheduleNotFoundException;
 import kg.mega.cinematica.mappers.SeatScheduleMapper;
+import kg.mega.cinematica.models.dto.OrderDto;
 import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.dto.SeatDto;
 import kg.mega.cinematica.models.dto.SeatScheduleDto;
@@ -71,7 +72,7 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
 
             seatScheduleDto.setRoomMovie(roomMovieDto);
             seatScheduleDto.setSeat(seatDto);
-            seatScheduleDto.setSeatStatus(SeatStatus.BOOKED);
+            seatScheduleDto.setSeatStatus(SeatStatus.FREE);
             save(seatScheduleDto);
         }
         return new Response("Saved successfully");

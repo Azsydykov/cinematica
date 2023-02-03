@@ -10,8 +10,8 @@ public interface RoomMoviePriceRep extends JpaRepository<RoomMoviePrice,Long> {
 
     @Query(value = "\tSELECT * FROM tb_room_movie_price as rmp INNER JOIN" +
             "\ttb_room_movie as rm on rmp.room_movie_id=rm.id" +
-            "\twhere rm.movie_id=:roomMovieId",nativeQuery = true)
-    List<RoomMoviePrice> findPriceByRoomMovieId(Long roomMovieId);
+            "\twhere rm.movie_id=:movieId",nativeQuery = true)
+    List<RoomMoviePrice> findPriceByMovieId(Long movieId);
 
 
 }

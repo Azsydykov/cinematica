@@ -14,10 +14,16 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoomMoviePriceDto extends WorkDateDto {
+public class RoomMoviePriceDto extends WorkDateDto implements Comparable<RoomMoviePriceDto> {
     @JsonIgnore
     Long id;
     RoomMovieDto roomMovie;
     PriceDto price;
+
+
+    @Override
+    public int compareTo(RoomMoviePriceDto o) {
+        return roomMovie.getId().compareTo(o.roomMovie.getId());
+    }
 
 }

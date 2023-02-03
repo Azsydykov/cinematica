@@ -5,6 +5,7 @@ import kg.mega.cinematica.dao.CinemaRep;
 import kg.mega.cinematica.exceptions.CinemaNotFoundException;
 import kg.mega.cinematica.mappers.CinemaMapper;
 import kg.mega.cinematica.models.dto.CinemaDto;
+import kg.mega.cinematica.models.entities.Cinema;
 import kg.mega.cinematica.models.request.SaveCinemaRequest;
 import kg.mega.cinematica.service.CinemaService;
 import org.springframework.stereotype.Service;
@@ -58,4 +59,5 @@ public class CinemaServiceImpl implements CinemaService {
         cinemaDto.setLogo(cinema.getLogo());
         return save(cinemaDto);
     }
+
 }
