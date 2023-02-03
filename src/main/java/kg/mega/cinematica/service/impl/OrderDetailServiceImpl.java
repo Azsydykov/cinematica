@@ -15,13 +15,13 @@ import java.util.List;
 public class OrderDetailServiceImpl implements OrderDetailService {
     OrderDetailMapper mapper = OrderDetailMapper.INSTANCE;
     private final OrderDetailRep rep;
-//    private final SeatScheduleService seatScheduleService;
+
 
 
     public OrderDetailServiceImpl(OrderDetailRep rep
                                   ) {
         this.rep = rep;
-//        this.seatScheduleService = seatScheduleService;
+
     }
 
     @Override

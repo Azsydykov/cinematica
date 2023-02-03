@@ -7,6 +7,7 @@ import kg.mega.cinematica.mappers.RoomMoviePriceMapper;
 import kg.mega.cinematica.models.dto.*;
 import kg.mega.cinematica.models.responces.*;
 import kg.mega.cinematica.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -28,6 +29,7 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
     private final CinemaService cinemaService;
     private PriceType priceType;
 
+    @Autowired
     public RoomMoviePriceServiceImpl(RoomMoviePriceRep rep, RoomMovieService roomMovieService,
                                      PriceService priceService, CinemaService cinemaService) {
         this.rep = rep;
@@ -145,6 +147,8 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
 
             RoomResponse roomResponse = new RoomResponse();
             roomResponse.setName(item.getRoom().getName());
+
+
             roomResponse.setRoomMovie(roomMovieResponseList);
             boolean inList = false;
             for (RoomResponse rp : roomResponseList) {
