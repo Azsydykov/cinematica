@@ -60,4 +60,8 @@ public class CinemaServiceImpl implements CinemaService {
         return save(cinemaDto);
     }
 
+    @Override
+    public List<CinemaDto> findCinemaByRoomId(Long roomId) {
+        return mapper.toDtos(rep.findCinemaByRoomId(roomId));
+    }
 }

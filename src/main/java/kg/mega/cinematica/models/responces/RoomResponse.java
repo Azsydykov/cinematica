@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoomResponse {
+    Long roomId;
     String name;
     List<RoomMovieResponse> roomMovie;
 }

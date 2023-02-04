@@ -15,8 +15,7 @@ import java.time.LocalTime;
 public class RoomMovieResponse {
     Long id;
     Double childPrice;
-    Double standartPrice;
-    Double studentPrice;
+    Double standardPrice;
     LocalTime startTime;
 
 }

@@ -18,4 +18,5 @@ public class RoomMovieDto extends WorkDateDto {
     ScheduleDto schedule;
 
 
+
 }

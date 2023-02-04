@@ -34,9 +34,9 @@ public class RoomMoviePriceController {
 
     @PostMapping("/create")
     @ApiOperation("Создание")
-    ResponseEntity<?> create(@RequestParam Long roomMovieId, @RequestParam  List<Long> priceIdList) {
+    ResponseEntity<?> create(@RequestParam Long roomMovieId, @RequestParam  List<Long> priceId) {
 
-            return new ResponseEntity<>(service.create(roomMovieId,priceIdList), HttpStatus.CREATED);
+            return new ResponseEntity<>(service.create(roomMovieId,priceId), HttpStatus.CREATED);
     }
 
     @GetMapping("/findById")
