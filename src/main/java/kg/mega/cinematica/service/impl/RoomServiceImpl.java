@@ -8,6 +8,7 @@ import kg.mega.cinematica.models.dto.RoomDto;
 import kg.mega.cinematica.models.request.SaveRoomRequest;
 import kg.mega.cinematica.service.CinemaService;
 import kg.mega.cinematica.service.RoomService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class RoomServiceImpl implements RoomService {
     private final RoomRep rep;
     private final CinemaService cinemaService;
 
+    @Autowired
     public RoomServiceImpl(RoomRep rep, CinemaService cinemaService) {
         this.rep = rep;
         this.cinemaService = cinemaService;

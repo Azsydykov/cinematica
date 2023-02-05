@@ -7,6 +7,7 @@ import kg.mega.cinematica.models.dto.*;
 import kg.mega.cinematica.models.request.SaveRoomMovieRequest;
 import kg.mega.cinematica.models.responces.*;
 import kg.mega.cinematica.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class RoomMovieServiceImpl implements RoomMovieService {
     private final RoomService roomService;
     private final ScheduleService scheduleService;
 
+    @Autowired
     public RoomMovieServiceImpl(RoomMovieRep rep, MovieService movieService,
                                 RoomService roomService,
                                 ScheduleService scheduleService) {

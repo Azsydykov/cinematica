@@ -6,6 +6,6 @@ import kg.mega.cinematica.models.responces.Response;
 import java.util.List;
 
 public interface OrderDetailService extends BaseService<OrderDetailDto>{
-    Response create(List<Long> seatScheduleList );
+
 
 }

@@ -8,6 +8,7 @@ import kg.mega.cinematica.models.dto.CinemaDto;
 import kg.mega.cinematica.models.entities.Cinema;
 import kg.mega.cinematica.models.request.SaveCinemaRequest;
 import kg.mega.cinematica.service.CinemaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,7 +23,7 @@ public class CinemaServiceImpl implements CinemaService {
 
 
     private final CinemaRep rep;
-
+    @Autowired
     public CinemaServiceImpl(CinemaRep rep) {
         this.rep = rep;
     }

@@ -6,6 +6,7 @@ import kg.mega.cinematica.mappers.PriceMapper;
 import kg.mega.cinematica.models.dto.PriceDto;
 import kg.mega.cinematica.models.request.SavePriceRequest;
 import kg.mega.cinematica.service.PriceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -16,7 +17,7 @@ public class PriceServiceImpl implements PriceService {
     PriceMapper mapper = PriceMapper.INSTANCE;
 
     private final PriceRep rep;
-
+    @Autowired
     public PriceServiceImpl(PriceRep rep) {
         this.rep = rep;
     }

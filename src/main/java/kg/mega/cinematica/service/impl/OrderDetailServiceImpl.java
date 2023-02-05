@@ -7,6 +7,7 @@ import kg.mega.cinematica.models.dto.*;
 import kg.mega.cinematica.models.responces.Response;
 import kg.mega.cinematica.service.*;
 import org.aspectj.weaver.ast.Or;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +18,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     private final OrderDetailRep rep;
 
 
-
-    public OrderDetailServiceImpl(OrderDetailRep rep
-                                  ) {
+    @Autowired
+    public OrderDetailServiceImpl(OrderDetailRep rep) {
         this.rep = rep;
-
     }
 
     @Override
@@ -46,22 +45,4 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         return mapper.toDtos(rep.findAll());
     }
 
-    @Override
-    public Response create(List<Long> seatScheduleList) {
-        OrderDto orderDto = new OrderDto();
-        orderDto.setPrice(null);
-
-
-//        for (Long id : seatScheduleList) {
-//            SeatScheduleDto seatScheduleDto = seatScheduleService.findById(id);
-//            OrderDetailDto orderDetailDto = new OrderDetailDto();
-//            orderDetailDto.setOrder(orderDto);
-//            orderDetailDto.setSeatSchedule(seatScheduleDto);
-//            save(orderDetailDto);
-//        }
-
-
-
-        return new Response("Success");
-    }
 }

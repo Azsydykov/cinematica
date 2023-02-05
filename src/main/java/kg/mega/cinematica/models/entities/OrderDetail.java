@@ -1,5 +1,6 @@
 package kg.mega.cinematica.models.entities;
 
+import kg.mega.cinematica.enums.PriceType;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -21,6 +22,8 @@ public class OrderDetail extends WorkDate {
     SeatSchedule seatSchedule;
     @ManyToOne
     Order order;
+    @Enumerated(EnumType.STRING)
+    PriceType priceType;
 
 
 

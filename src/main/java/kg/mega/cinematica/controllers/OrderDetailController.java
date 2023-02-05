@@ -26,11 +26,6 @@ public class OrderDetailController {
             return new ResponseEntity<>(service.save(orderDetailDto), HttpStatus.CREATED);
     }
 
-    @PostMapping("/create")
-    @ApiOperation("Создание")
-    ResponseEntity<?> create(@RequestParam List<Long> seatSchedule) {
-        return new ResponseEntity<>(service.create(seatSchedule), HttpStatus.CREATED);
-    }
 
     @GetMapping("/findById")
     @ApiOperation("Поиск деталей брони по id")

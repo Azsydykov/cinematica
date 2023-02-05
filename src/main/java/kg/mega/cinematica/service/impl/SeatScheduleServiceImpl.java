@@ -14,6 +14,7 @@ import kg.mega.cinematica.service.OrderService;
 import kg.mega.cinematica.service.RoomMovieService;
 import kg.mega.cinematica.service.SeatScheduleService;
 import kg.mega.cinematica.service.SeatService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,15 +28,13 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
     private final SeatScheduleRep rep;
     private final SeatService seatService;
     private final RoomMovieService roomMovieService;
-    private final OrderService orderService;
 
+    @Autowired
     public SeatScheduleServiceImpl(SeatScheduleRep rep, SeatService seatService,
-                                   RoomMovieService roomMovieService, OrderService orderService) {
+                                   RoomMovieService roomMovieService) {
         this.rep = rep;
         this.seatService = seatService;
         this.roomMovieService = roomMovieService;
-        this.orderService = orderService;
-
     }
 
 

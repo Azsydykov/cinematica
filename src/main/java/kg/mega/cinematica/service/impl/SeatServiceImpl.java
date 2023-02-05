@@ -10,6 +10,7 @@ import kg.mega.cinematica.service.PriceService;
 import kg.mega.cinematica.service.RoomMovieService;
 import kg.mega.cinematica.service.RoomService;
 import kg.mega.cinematica.service.SeatService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,14 +21,12 @@ public class SeatServiceImpl implements SeatService {
 
     private final SeatRep rep;
     private final RoomService roomService;
-    private final RoomMovieService roomMovieService;
-    private final PriceService priceService;
 
-    public SeatServiceImpl(SeatRep rep, RoomService roomService, PriceService priceService, RoomMovieService roomMovieService) {
+
+    @Autowired
+    public SeatServiceImpl(SeatRep rep, RoomService roomService) {
         this.rep = rep;
         this.roomService = roomService;
-        this.priceService = priceService;
-        this.roomMovieService = roomMovieService;
     }
 
     @Override
@@ -44,8 +43,6 @@ public class SeatServiceImpl implements SeatService {
             seatDto.setRow(seat.getRow());
             seatDto.setRoom(roomDto);
         return  save(seatDto);
-
-
     }
 
     @Override

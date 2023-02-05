@@ -5,6 +5,7 @@ import kg.mega.cinematica.exceptions.ScheduleNotFoundException;
 import kg.mega.cinematica.mappers.ScheduleMapper;
 import kg.mega.cinematica.models.dto.ScheduleDto;
 import kg.mega.cinematica.service.ScheduleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     ScheduleMapper mapper = ScheduleMapper.INSTANCE;
     private final ScheduleRep rep;
 
+    @Autowired
     public ScheduleServiceImpl(ScheduleRep rep) {
         this.rep = rep;
     }

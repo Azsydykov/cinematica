@@ -6,6 +6,7 @@ import kg.mega.cinematica.mappers.MovieMapper;
 import kg.mega.cinematica.models.dto.MovieDto;
 import kg.mega.cinematica.models.request.SaveMovieRequest;
 import kg.mega.cinematica.service.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class MovieServiceImpl implements MovieService {
     MovieMapper mapper = MovieMapper.INSTANCE;
 
     private final MovieRep rep;
-
+    @Autowired
     public MovieServiceImpl(MovieRep rep) {
         this.rep = rep;
     }

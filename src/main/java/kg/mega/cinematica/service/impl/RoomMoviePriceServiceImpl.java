@@ -99,31 +99,25 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
             roomResponse.setRoomId(roomMovieItem.getRoom().getId());
             roomResponse.setName(roomMovieItem.getRoom().getName());
 
-
-            List<RoomMovieResponse> newList = new ArrayList<>();
+            List<RoomMovieResponse> roomMovieResponseList = new ArrayList<>();
 
             RoomMovieResponse roomMovieResp = new RoomMovieResponse();
-            ;
 
             for (RoomMoviePriceDto item : roomMoviePriceList) {
 
 
                 if (roomMovieItem.getSchedule().getId().equals(item.getRoomMovie().getSchedule().getId())) {
                     if (item.getRoomMovie().getId().equals(roomMovieItem.getId())) {
-                        //   roomMovieResp.setId(item.getRoomMovie().getSchedule().getId());
                         //проверка на время сеанса
-                        if (!newList.isEmpty() &&
-                                newList.get((int) newList.stream().count() - 1).getId() == item.getRoomMovie().getId()) {
-                            roomMovieResp = newList.get((int) newList.stream().count() - 1);
+                        if (!roomMovieResponseList.isEmpty() &&
+                                roomMovieResponseList.get((int) roomMovieResponseList.stream().count() - 1).getId() == item.getRoomMovie().getId()) {
+                            roomMovieResp = roomMovieResponseList.get((int) roomMovieResponseList.stream().count() - 1);
                             //проверка есть ли в списке уже этот зал с ценой
                             //если да, то обновляем его прайс, если нет то создаем новый
 
-
-                            newList.remove((int) newList.stream().count() - 1);//удаляем чтобы не было дубликатов
+                            roomMovieResponseList.remove((int) roomMovieResponseList.stream().count() - 1);//удаляем чтобы не было дубликатов
                         } else {
-//                            roomMovieResp = new RoomMovieResponse();
                             roomMovieResp.setId(item.getRoomMovie().getId());
-
 
                         }
                         priceType = item.getPrice().getPriceType();
@@ -138,22 +132,19 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
                                 roomMovieResp.setStartTime(item.getRoomMovie().getSchedule().getStartTime());
                                 break;
                         }
-
                     }
                 }
             }
-            newList.add(roomMovieResp);
+            roomMovieResponseList.add(roomMovieResp);
 //проверка на дубли сенансов
             for (RoomResponse rp : roomResponses) {
                 if (rp.getRoomId().equals(roomResponse.getRoomId())) {
-                    newList.addAll(rp.getRoomMovie());
+                    roomMovieResponseList.addAll(rp.getRoomMovie());
                     roomResponses.remove(rp);
                     break;
                 }
-
             }
-            //
-            roomResponse.setRoomMovie(newList);
+            roomResponse.setRoomMovie(roomMovieResponseList);
             roomResponses.add(roomResponse);
         }
 
@@ -174,15 +165,11 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
                             list.addAll(roomResponseItem.getRoomMovie());
                             newRoomResp.remove(rp);
 
-
                             roomResponseItem.setRoomMovie(list);
                             break;
                         }
-
-
                     }
                     newRoomResp.add(roomResponseItem);
-
                 }
             }
 
@@ -194,19 +181,14 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
                     cinemaResponses.remove(rp);
                     break;
                 }
-
             }
             Set<RoomResponse> hashSet = new HashSet<RoomResponse>(newRoomResp);
             newRoomResp.clear();
             newRoomResp.addAll(hashSet);
 
             cinemaResponse.setRooms(newRoomResp);
-
             cinemaResponses.add(cinemaResponse);
-
         }
-
-
         GetRoomMovieResponse getRoomMovieResponse = new GetRoomMovieResponse();
         for (RoomMoviePriceDto item : roomMoviePriceList) {
             getRoomMovieResponse.setCinema(cinemaResponses);
