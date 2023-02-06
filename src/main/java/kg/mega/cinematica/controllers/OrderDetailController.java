@@ -26,7 +26,6 @@ public class OrderDetailController {
             return new ResponseEntity<>(service.save(orderDetailDto), HttpStatus.CREATED);
     }
 
-
     @GetMapping("/findById")
     @ApiOperation("Поиск деталей брони по id")
     ResponseEntity<?> findById(@RequestParam Long id) {

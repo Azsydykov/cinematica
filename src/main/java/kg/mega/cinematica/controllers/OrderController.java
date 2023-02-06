@@ -22,14 +22,13 @@ public class OrderController {
     @PostMapping("/save")
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody OrderDto orderDto) {
-
             return new ResponseEntity<>(service.save(orderDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/create")
     @ApiOperation("Создание")
-    ResponseEntity<?> create(@RequestParam List<Long> seatSchedule) {
-        return new ResponseEntity<>(service.create(seatSchedule), HttpStatus.CREATED);
+    ResponseEntity<?> book(@RequestParam Long roomMovieId, @RequestParam List<Long> seatId) {
+        return new ResponseEntity<>(service.book(roomMovieId,seatId), HttpStatus.CREATED);
     }
 
     @GetMapping("/findById")

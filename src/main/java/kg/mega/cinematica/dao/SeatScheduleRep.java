@@ -1,5 +1,6 @@
 package kg.mega.cinematica.dao;
 
+import kg.mega.cinematica.models.dto.SeatScheduleDto;
 import kg.mega.cinematica.models.entities.SeatSchedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +18,10 @@ public interface SeatScheduleRep extends JpaRepository<SeatSchedule,Long> {
             "\n" +
             "\tWHERE rm.id=:roomMovieId",nativeQuery = true)
     List<SeatSchedule> findByRoomMovieId(Long roomMovieId);
+
+    @Query(value = "SELECT * from tb_seat_schedule as ss\n" +
+            "WHERE room_movie_id=:roomMovieId",nativeQuery = true)
+    List<SeatSchedule> findByRoomMovieAndSeatsId(Long roomMovieId);
 }
 
 //ss.id,seat_status,row,number

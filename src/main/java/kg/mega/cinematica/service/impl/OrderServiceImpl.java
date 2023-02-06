@@ -1,6 +1,7 @@
 package kg.mega.cinematica.service.impl;
 
 import kg.mega.cinematica.dao.OrderRep;
+import kg.mega.cinematica.enums.PriceType;
 import kg.mega.cinematica.exceptions.OrderNotFoundException;
 import kg.mega.cinematica.mappers.OrderMapper;
 import kg.mega.cinematica.models.dto.OrderDetailDto;
@@ -20,17 +21,15 @@ public class OrderServiceImpl implements OrderService {
     OrderMapper mapper = OrderMapper.INSTANCE;
     private final OrderRep rep;
     private final OrderDetailService orderDetailService;
-    private final RoomMoviePriceService roomMoviePriceService;
+
     private final SeatScheduleService seatScheduleService;
 
     @Autowired
     public OrderServiceImpl(OrderRep rep,
                             OrderDetailService orderDetailService,
-                            RoomMoviePriceService roomMoviePriceService,
                             SeatScheduleService seatScheduleService) {
         this.rep = rep;
         this.orderDetailService = orderDetailService;
-        this.roomMoviePriceService = roomMoviePriceService;
         this.seatScheduleService = seatScheduleService;
     }
 
@@ -58,18 +57,30 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Response create(List<Long> seatScheduleList) {
+    public OrderDto create() {
         OrderDto orderDto = new OrderDto();
+        orderDto.setPrice(0.0);
 
-        for (Long id : seatScheduleList) {
-            SeatScheduleDto seatScheduleDto = seatScheduleService.findById(id);
+        return save(orderDto);
+    }
+
+    @Override
+    public OrderDto book(Long roomMovieId, List<Long> seatList) {
+        OrderDto orderDto = create();
+        seatScheduleService.create(roomMovieId, seatList);
+        List<SeatScheduleDto> seatScheduleDtoList = seatScheduleService.findByRoomMovieAndSeatsId(roomMovieId);
+
+
+        for (SeatScheduleDto item : seatScheduleDtoList) {
+            SeatScheduleDto seatScheduleDto = seatScheduleService.findById(item.getId());
             OrderDetailDto orderDetailDto = new OrderDetailDto();
             orderDetailDto.setOrder(orderDto);
+            orderDetailDto.setPriceType(PriceType.CHILD);
             orderDetailDto.setSeatSchedule(seatScheduleDto);
             orderDetailService.save(orderDetailDto);
-
         }
-
-        return null;
+        return orderDto;
     }
+
+
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface OrderDetailService extends BaseService<OrderDetailDto>{
 
-
+//    OrderDetailDto create(OrderDetailDto orderDetailDto);
 }

@@ -35,17 +35,6 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public SeatDto create(SaveSeatRequest seat) {
-        RoomDto roomDto = roomService.findById(seat.getRoomId());
-
-            SeatDto seatDto = new SeatDto();
-            seatDto.setNumber(seat.getNumber());
-            seatDto.setRow(seat.getRow());
-            seatDto.setRoom(roomDto);
-        return  save(seatDto);
-    }
-
-    @Override
     public SeatDto findById(Long id) {
         return mapper.toDto(rep.findById(id).orElseThrow(() -> new SeatNotFoundException("Seat not found!")));
     }
@@ -60,5 +49,21 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public List<SeatDto> findAll() {
         return mapper.toDtos(rep.findAll());
+    }
+
+    @Override
+    public List<SeatDto> findSeatsByRoomId(Long roomMovieId) {
+        return mapper.toDtos(rep.findSeatsByRoomId(roomMovieId));
+    }
+
+    @Override
+    public SeatDto create(SaveSeatRequest seat) {
+        RoomDto roomDto = roomService.findById(seat.getRoomId());
+
+        SeatDto seatDto = new SeatDto();
+        seatDto.setNumber(seat.getNumber());
+        seatDto.setRow(seat.getRow());
+        seatDto.setRoom(roomDto);
+        return  save(seatDto);
     }
 }
