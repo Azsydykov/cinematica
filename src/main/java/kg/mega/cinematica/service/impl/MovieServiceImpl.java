@@ -5,6 +5,7 @@ import kg.mega.cinematica.exceptions.MovieNotFoundException;
 import kg.mega.cinematica.mappers.MovieMapper;
 import kg.mega.cinematica.models.dto.MovieDto;
 import kg.mega.cinematica.models.request.SaveMovieRequest;
+import kg.mega.cinematica.models.responces.GetAllMoviesResponse;
 import kg.mega.cinematica.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,12 +64,18 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<String> getAllMovies(int limit, int offset) {
+    public List<GetAllMoviesResponse> getAllMovies(int limit, int offset) {
         List<MovieDto> movieList = findAllMovies(limit,offset);
-        List<String> allMovieList = new ArrayList<>();
+        List<GetAllMoviesResponse> getAllMoviesResponseList = new ArrayList<>();
+        GetAllMoviesResponse getAllMoviesResponse= new GetAllMoviesResponse();
         for (MovieDto item:movieList){
-            allMovieList.add("ID="+item.getId()+", "+item.getName()+", "+item.getImage()+ ", " +item.getPg());
+            getAllMoviesResponse.setId(item.getId());
+            getAllMoviesResponse.setName(item.getName());
+            getAllMoviesResponse.setRating(item.getRating());
+            getAllMoviesResponse.setPg(item.getPg());
+            getAllMoviesResponse.setImageLink(item.getImage());
+            getAllMoviesResponseList.add(getAllMoviesResponse);
         }
-        return allMovieList;
+        return getAllMoviesResponseList ;
     }
 }
