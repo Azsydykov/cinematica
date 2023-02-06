@@ -17,7 +17,7 @@ public class RoomMoviePrice extends WorkDate{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @ManyToOne
+    @ManyToOne()
     RoomMovie roomMovie;
     @ManyToOne
     Price price;

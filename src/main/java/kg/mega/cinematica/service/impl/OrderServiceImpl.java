@@ -70,14 +70,22 @@ public class OrderServiceImpl implements OrderService {
         seatScheduleService.create(roomMovieId, seatList);
         List<SeatScheduleDto> seatScheduleDtoList = seatScheduleService.findByRoomMovieAndSeatsId(roomMovieId);
 
-
         for (SeatScheduleDto item : seatScheduleDtoList) {
-            SeatScheduleDto seatScheduleDto = seatScheduleService.findById(item.getId());
-            OrderDetailDto orderDetailDto = new OrderDetailDto();
-            orderDetailDto.setOrder(orderDto);
-            orderDetailDto.setPriceType(PriceType.CHILD);
-            orderDetailDto.setSeatSchedule(seatScheduleDto);
-            orderDetailService.save(orderDetailDto);
+
+            //условие, чтобы сохранял только с теми seatID которые приходят
+
+            for (Long seatItem : seatList) {
+                if(item.getSeat().getId().equals(seatItem)){
+                SeatScheduleDto seatScheduleDto = seatScheduleService.findById(item.getId());
+                OrderDetailDto orderDetailDto = new OrderDetailDto();
+                orderDetailDto.setOrder(orderDto);
+                orderDetailDto.setPriceType(PriceType.CHILD);
+                orderDetailDto.setSeatSchedule(seatScheduleDto);
+                orderDetailService.save(orderDetailDto);
+            }else {
+                    break;
+                }
+        }
         }
         return orderDto;
     }
