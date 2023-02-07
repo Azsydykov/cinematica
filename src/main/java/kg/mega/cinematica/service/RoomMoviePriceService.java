@@ -1,8 +1,6 @@
 package kg.mega.cinematica.service;
 
-import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.dto.RoomMoviePriceDto;
-import kg.mega.cinematica.models.entities.RoomMoviePrice;
 import kg.mega.cinematica.models.responces.GetRoomMovieResponse;
 import kg.mega.cinematica.models.responces.Response;
 

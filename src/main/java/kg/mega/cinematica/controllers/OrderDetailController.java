@@ -42,7 +42,6 @@ public class OrderDetailController {
     @DeleteMapping("/delete")
     @ApiOperation("Удаление")
     ResponseEntity<?> delete(@RequestParam Long id) {
-
             return ResponseEntity.ok(service.delete(id));
     }
 

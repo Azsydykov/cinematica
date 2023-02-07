@@ -30,9 +30,7 @@ public class PriceController {
     @PostMapping("/create")
     @ApiOperation("Создание")
     ResponseEntity<?> create(@ModelAttribute SavePriceRequest price) {
-
             return new ResponseEntity<>(service.create(price), HttpStatus.CREATED);
-
     }
 
     @GetMapping("/findById")

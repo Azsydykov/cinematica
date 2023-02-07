@@ -4,17 +4,15 @@ import kg.mega.cinematica.dao.RoomMoviePriceRep;
 import kg.mega.cinematica.enums.PriceType;
 import kg.mega.cinematica.exceptions.RoomMoviePriceNotFoundException;
 import kg.mega.cinematica.mappers.RoomMoviePriceMapper;
-import kg.mega.cinematica.models.dto.*;
-import kg.mega.cinematica.models.entities.RoomMoviePrice;
+import kg.mega.cinematica.models.dto.PriceDto;
+import kg.mega.cinematica.models.dto.RoomMovieDto;
+import kg.mega.cinematica.models.dto.RoomMoviePriceDto;
 import kg.mega.cinematica.models.responces.*;
 import kg.mega.cinematica.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -87,7 +85,7 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
     @Override
     public GetRoomMovieResponse getRoomMovieByMovieId(Long movieId, LocalDate startDate) {
         List<RoomMoviePriceDto> roomMoviePriceList = findPriceByMovieId(movieId, startDate);
-        Collections.sort(roomMoviePriceList);
+        Collections.sort(roomMoviePriceList); //данные об одном сеансе идут последовательно
 
         List<RoomMovieDto> roomMovieDtos = roomMovieService.findRoomMovieByMovieId(movieId, startDate);
 

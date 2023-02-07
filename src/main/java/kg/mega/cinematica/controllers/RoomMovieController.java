@@ -4,15 +4,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.request.SaveRoomMovieRequest;
-import kg.mega.cinematica.models.responces.GetRoomMovieResponse;
 import kg.mega.cinematica.service.RoomMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Api(tags = "Сеанс")
@@ -28,7 +25,6 @@ public class RoomMovieController {
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody RoomMovieDto roomMovieDto) {
             return new ResponseEntity<>(service.save(roomMovieDto), HttpStatus.CREATED);
-
     }
 
     @PostMapping("/create")

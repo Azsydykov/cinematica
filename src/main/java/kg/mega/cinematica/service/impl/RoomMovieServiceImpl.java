@@ -3,16 +3,20 @@ package kg.mega.cinematica.service.impl;
 import kg.mega.cinematica.dao.RoomMovieRep;
 import kg.mega.cinematica.exceptions.RoomMovieNotFoundException;
 import kg.mega.cinematica.mappers.RoomMovieMapper;
-import kg.mega.cinematica.models.dto.*;
+import kg.mega.cinematica.models.dto.MovieDto;
+import kg.mega.cinematica.models.dto.RoomDto;
+import kg.mega.cinematica.models.dto.RoomMovieDto;
+import kg.mega.cinematica.models.dto.ScheduleDto;
 import kg.mega.cinematica.models.request.SaveRoomMovieRequest;
-import kg.mega.cinematica.models.responces.*;
-import kg.mega.cinematica.service.*;
+import kg.mega.cinematica.models.responces.Response;
+import kg.mega.cinematica.service.MovieService;
+import kg.mega.cinematica.service.RoomMovieService;
+import kg.mega.cinematica.service.RoomService;
+import kg.mega.cinematica.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

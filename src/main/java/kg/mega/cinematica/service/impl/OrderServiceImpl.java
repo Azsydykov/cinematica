@@ -135,7 +135,7 @@ public class OrderServiceImpl implements OrderService {
             totalPrice += priceService.getPrice(item.getPriceType());
 
         }
-        //проверить
+        //проверить сохранение тоталПрайс
         orderDto.setPrice(totalPrice);
         save(orderDto);
 

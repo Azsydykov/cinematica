@@ -3,10 +3,8 @@ package kg.mega.cinematica.service.impl;
 import kg.mega.cinematica.dao.OrderDetailRep;
 import kg.mega.cinematica.exceptions.OrderDetailNotFoundException;
 import kg.mega.cinematica.mappers.OrderDetailMapper;
-import kg.mega.cinematica.models.dto.*;
-import kg.mega.cinematica.models.responces.Response;
-import kg.mega.cinematica.service.*;
-import org.aspectj.weaver.ast.Or;
+import kg.mega.cinematica.models.dto.OrderDetailDto;
+import kg.mega.cinematica.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -45,15 +43,6 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     @Override
     public List<OrderDetailDto> findAll() {
         return mapper.toDtos(rep.findAll());
-    }
-
-    @Override
-    public OrderDetailDto create(OrderDto order, SeatScheduleDto seatSchedule) {
-        OrderDetailDto orderDetailDto = new OrderDetailDto();
-        orderDetailDto.setOrder(order);
-        orderDetailDto.setSeatSchedule(seatSchedule);
-
-        return save(orderDetailDto);
     }
 
 }

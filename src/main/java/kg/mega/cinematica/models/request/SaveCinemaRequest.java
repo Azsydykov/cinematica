@@ -1,6 +1,5 @@
 package kg.mega.cinematica.models.request;
 
-import kg.mega.cinematica.models.entities.WorkDate;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

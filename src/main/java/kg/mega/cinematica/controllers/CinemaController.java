@@ -31,7 +31,6 @@ public class CinemaController {
     @ApiOperation("Создание")
     ResponseEntity<?> create(@ModelAttribute SaveCinemaRequest cinema) {
             return new ResponseEntity<>(service.create(cinema), HttpStatus.CREATED);
-
     }
 
     @GetMapping("/findById")

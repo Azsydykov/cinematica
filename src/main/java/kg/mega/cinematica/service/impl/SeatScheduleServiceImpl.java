@@ -4,21 +4,22 @@ import kg.mega.cinematica.dao.SeatScheduleRep;
 import kg.mega.cinematica.enums.SeatStatus;
 import kg.mega.cinematica.exceptions.SeatScheduleNotFoundException;
 import kg.mega.cinematica.mappers.SeatScheduleMapper;
-import kg.mega.cinematica.models.dto.*;
-import kg.mega.cinematica.models.responces.Response;
-import kg.mega.cinematica.models.responces.RoomResponse;
+import kg.mega.cinematica.models.dto.RoomDto;
+import kg.mega.cinematica.models.dto.RoomMovieDto;
+import kg.mega.cinematica.models.dto.SeatDto;
+import kg.mega.cinematica.models.dto.SeatScheduleDto;
 import kg.mega.cinematica.models.responces.SeatScheduleResponse;
-import kg.mega.cinematica.service.*;
+import kg.mega.cinematica.service.RoomMovieService;
+import kg.mega.cinematica.service.RoomService;
+import kg.mega.cinematica.service.SeatScheduleService;
+import kg.mega.cinematica.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)

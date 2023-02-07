@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -26,9 +25,7 @@ public class ScheduleController {
     @PostMapping("/save")
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody ScheduleDto scheduleDto) {
-
             return new ResponseEntity<>(service.save(scheduleDto), HttpStatus.CREATED);
-
     }
 
     @PostMapping("/create")
@@ -37,9 +34,7 @@ public class ScheduleController {
                              @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDay,
                              @RequestParam(defaultValue = "HH:mm")
     @DateTimeFormat(pattern = "HH:mm") LocalTime startTime) {
-
             return new ResponseEntity<>(service.create(startDay,startTime), HttpStatus.CREATED);
-
     }
 
     @GetMapping("/findById")

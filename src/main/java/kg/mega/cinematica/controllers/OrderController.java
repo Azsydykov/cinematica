@@ -30,7 +30,7 @@ public class OrderController {
     }
 
     @PostMapping("/create")
-    @ApiOperation("Создание")
+    @ApiOperation("Бронь/Покупка")
     ResponseEntity<OrderResponse> book(@RequestParam Long roomMovieId, @RequestBody Map<Long,PriceType> seatIdAndPriceType) {
         return new ResponseEntity<>(service.book(roomMovieId,seatIdAndPriceType), HttpStatus.CREATED);
     }
