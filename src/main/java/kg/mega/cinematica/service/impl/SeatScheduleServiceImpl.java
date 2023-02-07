@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-//@Transactional(propagation = Propagation.NESTED)
+@Transactional(propagation = Propagation.REQUIRED)
 public class SeatScheduleServiceImpl implements SeatScheduleService {
     SeatScheduleMapper mapper = SeatScheduleMapper.INSTANCE;
 

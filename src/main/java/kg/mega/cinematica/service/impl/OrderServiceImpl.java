@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-//@Transactional(propagation = Propagation.NESTED)
+@Transactional(propagation = Propagation.REQUIRED)
 public class OrderServiceImpl implements OrderService {
     OrderMapper mapper = OrderMapper.INSTANCE;
     private final OrderRep rep;
@@ -115,6 +115,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponse getOrderDetail(List<OrderDetailDto> orderDetailDtoList) {
+        OrderDto orderDto = create();
         OrderResponse orderResponse = new OrderResponse();
         orderResponse.setMovieName(orderDetailDtoList.get(0).getSeatSchedule().getRoomMovie().getMovie().getName());
         orderResponse.setRoom(orderDetailDtoList.get(0).getSeatSchedule().getRoomMovie().getRoom().getName());
@@ -134,6 +135,10 @@ public class OrderServiceImpl implements OrderService {
             totalPrice += priceService.getPrice(item.getPriceType());
 
         }
+        //проверить
+        orderDto.setPrice(totalPrice);
+        save(orderDto);
+
         orderResponse.setSeats(seats);
         orderResponse.setTotalPrice(totalPrice);
         return orderResponse;
