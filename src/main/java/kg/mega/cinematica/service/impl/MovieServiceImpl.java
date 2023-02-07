@@ -67,8 +67,9 @@ public class MovieServiceImpl implements MovieService {
     public List<GetAllMoviesResponse> getAllMovies(int limit, int offset) {
         List<MovieDto> movieList = findAllMovies(limit,offset);
         List<GetAllMoviesResponse> getAllMoviesResponseList = new ArrayList<>();
-        GetAllMoviesResponse getAllMoviesResponse= new GetAllMoviesResponse();
+
         for (MovieDto item:movieList){
+            GetAllMoviesResponse getAllMoviesResponse= new GetAllMoviesResponse();
             getAllMoviesResponse.setId(item.getId());
             getAllMoviesResponse.setName(item.getName());
             getAllMoviesResponse.setRating(item.getRating());
