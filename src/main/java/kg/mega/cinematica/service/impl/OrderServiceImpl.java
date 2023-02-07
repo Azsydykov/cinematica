@@ -29,17 +29,20 @@ public class OrderServiceImpl implements OrderService {
     private final SeatService seatService;
     private final SeatScheduleService seatScheduleService;
     private final RoomMovieService roomMovieService;
+    private final PriceService priceService;
 
     @Autowired
     public OrderServiceImpl(OrderRep rep,
                             OrderDetailService orderDetailService,
                             SeatScheduleService seatScheduleService,
-                            SeatService seatService, RoomMovieService roomMovieService) {
+                            SeatService seatService, RoomMovieService roomMovieService,
+                            PriceService priceService) {
         this.rep = rep;
         this.orderDetailService = orderDetailService;
         this.seatScheduleService = seatScheduleService;
         this.seatService = seatService;
         this.roomMovieService = roomMovieService;
+        this.priceService = priceService;
     }
 
     @Override
@@ -100,12 +103,13 @@ public class OrderServiceImpl implements OrderService {
                 SeatScheduleDto seatScheduleDto1 = seatScheduleService.findById(item.getId());
                 OrderDetailDto orderDetailDto = new OrderDetailDto();
                 orderDetailDto.setOrder(orderDto);
+                orderDetailDto.setPriceType(entry.getValue());
                 orderDetailDto.setSeatSchedule(seatScheduleDto1);
                 orderDetailService.save(orderDetailDto);
                 orderDetailDtoList.add(orderDetailDto);
             }
         }
-        OrderResponse orderResponse =  getOrderDetail(orderDetailDtoList);
+        OrderResponse orderResponse = getOrderDetail(orderDetailDtoList);
         return orderResponse;
     }
 
@@ -122,14 +126,16 @@ public class OrderServiceImpl implements OrderService {
         List<SeatResponse> seats = new ArrayList<>();
 
         for (OrderDetailDto item : orderDetailDtoList) {
-            SeatResponse seatResponse= new SeatResponse();
+            SeatResponse seatResponse = new SeatResponse();
             seatResponse.setRow(item.getSeatSchedule().getSeat().getRow());
             seatResponse.setSeatNumber(item.getSeatSchedule().getSeat().getNumber());
             seats.add(seatResponse);
-//            totalPrice+=item
+
+            totalPrice += priceService.getPrice(item.getPriceType());
 
         }
         orderResponse.setSeats(seats);
+        orderResponse.setTotalPrice(totalPrice);
         return orderResponse;
 
 
