@@ -19,9 +19,9 @@ public interface SeatScheduleRep extends JpaRepository<SeatSchedule,Long> {
             "\tWHERE rm.id=:roomMovieId",nativeQuery = true)
     List<SeatSchedule> findByRoomMovieId(Long roomMovieId);
 
-    @Query(value = "SELECT * from tb_seat_schedule as ss\n" +
-            "WHERE room_movie_id=:roomMovieId",nativeQuery = true)
-    List<SeatSchedule> findByRoomMovieAndSeatsId(Long roomMovieId);
+    @Query(value = "SELECT id from tb_seat_schedule\n" +
+            "WHERE room_movie_id=:roomMovieId and seat_id=:seatsId",nativeQuery = true)
+    List<SeatSchedule> findByRoomMovieAndSeatsId(Long roomMovieId, Long seatsId);
 }
 
 //ss.id,seat_status,row,number

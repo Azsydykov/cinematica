@@ -11,6 +11,8 @@ import kg.mega.cinematica.models.responces.SeatScheduleResponse;
 import kg.mega.cinematica.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,7 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-
+//@Transactional(propagation = Propagation.NESTED)
 public class SeatScheduleServiceImpl implements SeatScheduleService {
     SeatScheduleMapper mapper = SeatScheduleMapper.INSTANCE;
 
@@ -108,8 +110,8 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
     }
 
     @Override
-    public List<SeatScheduleDto> findByRoomMovieAndSeatsId(Long roomMovieId) {
-        return mapper.toDtos(rep.findByRoomMovieAndSeatsId(roomMovieId));
+    public List<SeatScheduleDto> findByRoomMovieAndSeatsId(Long roomMovieId,Long seatId) {
+        return mapper.toDtos(rep.findByRoomMovieAndSeatsId(roomMovieId,seatId));
     }
 
     @Override

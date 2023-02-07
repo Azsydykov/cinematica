@@ -2,35 +2,44 @@ package kg.mega.cinematica.service.impl;
 
 import kg.mega.cinematica.dao.OrderRep;
 import kg.mega.cinematica.enums.PriceType;
+import kg.mega.cinematica.enums.SeatStatus;
 import kg.mega.cinematica.exceptions.OrderNotFoundException;
 import kg.mega.cinematica.mappers.OrderMapper;
-import kg.mega.cinematica.models.dto.OrderDetailDto;
-import kg.mega.cinematica.models.dto.OrderDto;
-import kg.mega.cinematica.models.dto.RoomMoviePriceDto;
-import kg.mega.cinematica.models.dto.SeatScheduleDto;
+import kg.mega.cinematica.models.dto.*;
+import kg.mega.cinematica.models.entities.RoomMoviePrice;
+import kg.mega.cinematica.models.responces.OrderResponse;
 import kg.mega.cinematica.models.responces.Response;
+import kg.mega.cinematica.models.responces.SeatResponse;
 import kg.mega.cinematica.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
+//@Transactional(propagation = Propagation.NESTED)
 public class OrderServiceImpl implements OrderService {
     OrderMapper mapper = OrderMapper.INSTANCE;
     private final OrderRep rep;
     private final OrderDetailService orderDetailService;
-
+    private final SeatService seatService;
     private final SeatScheduleService seatScheduleService;
+    private final RoomMovieService roomMovieService;
 
     @Autowired
     public OrderServiceImpl(OrderRep rep,
                             OrderDetailService orderDetailService,
-                            SeatScheduleService seatScheduleService) {
+                            SeatScheduleService seatScheduleService,
+                            SeatService seatService, RoomMovieService roomMovieService) {
         this.rep = rep;
         this.orderDetailService = orderDetailService;
         this.seatScheduleService = seatScheduleService;
+        this.seatService = seatService;
+        this.roomMovieService = roomMovieService;
     }
 
     @Override
@@ -65,30 +74,64 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto book(Long roomMovieId, List<Long> seatList) {
+    public OrderResponse book(Long roomMovieId, Map<Long, PriceType> seatIdAndPriceType) {
         OrderDto orderDto = create();
-        seatScheduleService.create(roomMovieId, seatList);
-        List<SeatScheduleDto> seatScheduleDtoList = seatScheduleService.findByRoomMovieAndSeatsId(roomMovieId);
 
-        for (SeatScheduleDto item : seatScheduleDtoList) {
+        SeatScheduleDto seatScheduleDto = new SeatScheduleDto();
+        List<SeatScheduleDto> scheduleDtos;
+        List<OrderDetailDto> orderDetailDtoList = new ArrayList<>();
+        List<PriceType> priceTypeList = new ArrayList<>();
+        for (Map.Entry<Long, PriceType> entry : seatIdAndPriceType.entrySet()) {
+            List<Long> seatsId = new ArrayList<>();
+            seatsId.add(entry.getKey());
+            priceTypeList.add(entry.getValue());
+            SeatDto seatDto = seatService.findById(entry.getKey());
+            RoomMovieDto roomMovieDto = roomMovieService.findById(roomMovieId);
 
-            //условие, чтобы сохранял только с теми seatID которые приходят
+            seatScheduleDto.setSeat(seatDto);
+            seatScheduleDto.setRoomMovie(roomMovieDto);
+            seatScheduleDto.setSeatStatus(SeatStatus.BOUGHT);
+            seatScheduleService.save(seatScheduleDto);
 
-            for (Long seatItem : seatList) {
-                if(item.getSeat().getId().equals(seatItem)){
-                SeatScheduleDto seatScheduleDto = seatScheduleService.findById(item.getId());
+            scheduleDtos = seatScheduleService.findByRoomMovieAndSeatsId(roomMovieId, entry.getKey());
+
+
+            for (SeatScheduleDto item : scheduleDtos) {
+                SeatScheduleDto seatScheduleDto1 = seatScheduleService.findById(item.getId());
                 OrderDetailDto orderDetailDto = new OrderDetailDto();
                 orderDetailDto.setOrder(orderDto);
-                orderDetailDto.setPriceType(PriceType.CHILD);
-                orderDetailDto.setSeatSchedule(seatScheduleDto);
+                orderDetailDto.setSeatSchedule(seatScheduleDto1);
                 orderDetailService.save(orderDetailDto);
-            }else {
-                    break;
-                }
+                orderDetailDtoList.add(orderDetailDto);
+            }
         }
-        }
-        return orderDto;
+        OrderResponse orderResponse =  getOrderDetail(orderDetailDtoList);
+        return orderResponse;
     }
 
+    @Override
+    public OrderResponse getOrderDetail(List<OrderDetailDto> orderDetailDtoList) {
+        OrderResponse orderResponse = new OrderResponse();
+        orderResponse.setMovieName(orderDetailDtoList.get(0).getSeatSchedule().getRoomMovie().getMovie().getName());
+        orderResponse.setRoom(orderDetailDtoList.get(0).getSeatSchedule().getRoomMovie().getRoom().getName());
+        orderResponse.setCinemaName(orderDetailDtoList.get(0).getSeatSchedule().getRoomMovie().getRoom().getCinema().getName());
+        orderResponse.setStartDay(orderDetailDtoList.get(0).getSeatSchedule().getRoomMovie().getSchedule().getStartDay());
+        orderResponse.setStartTime(orderDetailDtoList.get(0).getSeatSchedule().getRoomMovie().getSchedule().getStartTime());
 
+        double totalPrice = 0;
+        List<SeatResponse> seats = new ArrayList<>();
+
+        for (OrderDetailDto item : orderDetailDtoList) {
+            SeatResponse seatResponse= new SeatResponse();
+            seatResponse.setRow(item.getSeatSchedule().getSeat().getRow());
+            seatResponse.setSeatNumber(item.getSeatSchedule().getSeat().getNumber());
+            seats.add(seatResponse);
+//            totalPrice+=item
+
+        }
+        orderResponse.setSeats(seats);
+        return orderResponse;
+
+
+    }
 }

@@ -1,19 +1,14 @@
 package kg.mega.cinematica.service.impl;
 
-import com.fasterxml.jackson.core.JsonParser;
 import kg.mega.cinematica.dao.CinemaRep;
 import kg.mega.cinematica.exceptions.CinemaNotFoundException;
 import kg.mega.cinematica.mappers.CinemaMapper;
 import kg.mega.cinematica.models.dto.CinemaDto;
-import kg.mega.cinematica.models.entities.Cinema;
 import kg.mega.cinematica.models.request.SaveCinemaRequest;
 import kg.mega.cinematica.service.CinemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
