@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PriceDto extends WorkDateDto {
-    @JsonIgnore
+
     Long id;
     Double price;
     PriceType priceType;

@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SeatDto extends WorkDateDto{
-    @JsonIgnore
+
     Long id;
     int number;
     RoomDto room;

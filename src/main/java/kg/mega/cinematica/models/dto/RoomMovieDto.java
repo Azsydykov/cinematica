@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoomMovieDto extends WorkDateDto {
-    @JsonIgnore
+
     Long id;
     RoomDto room;
     MovieDto movie;

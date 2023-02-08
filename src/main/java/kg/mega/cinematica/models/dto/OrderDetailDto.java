@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderDetailDto extends WorkDateDto {
-    @JsonIgnore
+
     Long id;
     SeatScheduleDto seatSchedule;
     OrderDto order;
