@@ -117,6 +117,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderResponse getOrderDetail(List<OrderDetailDto> orderDetailDtoList) {
         OrderDto orderDto = orderDetailDtoList.get(0).getOrder();
         OrderResponse orderResponse = new OrderResponse();
+        orderResponse.setOrderId(orderDto.getId());
         orderResponse.setMovieName(orderDetailDtoList.get(0).getSeatSchedule().getRoomMovie().getMovie().getName());
         orderResponse.setRoom(orderDetailDtoList.get(0).getSeatSchedule().getRoomMovie().getRoom().getName());
         orderResponse.setCinemaName(orderDetailDtoList.get(0).getSeatSchedule().getRoomMovie().getRoom().getCinema().getName());

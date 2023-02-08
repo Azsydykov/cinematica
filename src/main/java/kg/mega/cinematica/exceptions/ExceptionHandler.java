@@ -34,7 +34,6 @@ public class ExceptionHandler {
         return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<?> handleException(OrderNotFoundException e){
         return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);

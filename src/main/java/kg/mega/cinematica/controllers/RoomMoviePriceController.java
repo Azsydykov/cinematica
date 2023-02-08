@@ -54,12 +54,11 @@ public class RoomMoviePriceController {
     }
 
     @GetMapping("/getRoomMovieByMovieId")
-    @ApiOperation("Вывод сеанса")
+    @ApiOperation("Вывод сеанса по id фильма")
     ResponseEntity<GetRoomMovieResponse> getRoomMovieByMovieId(@RequestParam Long movieId,
                                                                @RequestParam
                                                                @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDay) {
-        return ResponseEntity.ok(service.getRoomMovieByMovieId(movieId, startDay));
-
+            return ResponseEntity.ok(service.getRoomMovieByMovieId(movieId, startDay));
         //(defaultValue = "yyyy-MM-dd")
     }
 }

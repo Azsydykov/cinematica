@@ -12,4 +12,5 @@ public class SaveRoomRequest {
     Long cinemaId;
     int seatCount;
     String name;
+
 }

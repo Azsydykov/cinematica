@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "Бронь/Покупка")
+@Api(tags = "Заказ")
 @RestController
 @RequestMapping("/api/v1/order")
 public class OrderController {
@@ -30,20 +30,20 @@ public class OrderController {
     }
 
     @PostMapping("/create")
-    @ApiOperation("Бронь/Покупка")
+    @ApiOperation("Заказ")
     ResponseEntity<OrderResponse> book(@RequestParam Long roomMovieId, @RequestBody Map<Long,PriceType> seatIdAndPriceType) {
         return new ResponseEntity<>(service.book(roomMovieId,seatIdAndPriceType), HttpStatus.CREATED);
     }
 
 
     @GetMapping("/findById")
-    @ApiOperation("Поиск брони по id")
+    @ApiOperation("Поиск заказа по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
         return  ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/findAll")
-    @ApiOperation("Вывод брони")
+    @ApiOperation("Вывод заказов")
     ResponseEntity<List<OrderDto>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }

@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 public class SaveSeatRequest {
 
     Long roomId;
-    int number;
-    int row;
+
+    int rowsCount;
 
 }

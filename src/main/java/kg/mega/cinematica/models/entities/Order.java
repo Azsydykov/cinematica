@@ -20,11 +20,11 @@ public class Order extends WorkDate{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     Double price;
-    LocalDateTime startDate;
+    LocalDateTime orderDate;
 
     @PrePersist
     protected void onCreateOrderDate() {
-        startDate = LocalDateTime.now();
+        orderDate = LocalDateTime.now();
     }
 
 }

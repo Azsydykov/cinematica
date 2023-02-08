@@ -19,6 +19,7 @@ public class RoomServiceImpl implements RoomService {
     private final RoomRep rep;
     private final CinemaService cinemaService;
 
+
     @Autowired
     public RoomServiceImpl(RoomRep rep, CinemaService cinemaService) {
         this.rep = rep;
@@ -55,6 +56,7 @@ public class RoomServiceImpl implements RoomService {
         roomDto.setSeatCount(room.getSeatCount());
         roomDto.setCinema(cinema);
         return save(roomDto);
+
     }
 
     @Override

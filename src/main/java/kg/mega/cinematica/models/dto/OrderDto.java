@@ -17,9 +17,9 @@ import java.time.LocalTime;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderDto extends WorkDateDto {
-    @JsonIgnore
+
     Long id;
     Double price;
-    LocalDateTime startDate;
+    LocalDateTime orderDate;
 
 }
