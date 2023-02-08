@@ -1,6 +1,5 @@
 package kg.mega.cinematica.models.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +12,7 @@ import java.time.LocalTime;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ScheduleDto extends WorkDateDto {
-    @JsonIgnore
+
     Long id;
     LocalDate startDay;
     LocalTime startTime;

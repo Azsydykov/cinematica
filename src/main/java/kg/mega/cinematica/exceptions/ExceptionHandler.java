@@ -1,5 +1,6 @@
 package kg.mega.cinematica.exceptions;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,6 +14,17 @@ public class ExceptionHandler {
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler
+    public ResponseEntity<?> handleException(RuntimeException e){
+        e.printStackTrace();
+        return new ResponseEntity("Системная ошибка!", HttpStatus.CONFLICT);
+    }
+    @org.springframework.web.bind.annotation.ExceptionHandler
+    public ResponseEntity<?> handleException(DataIntegrityViolationException e){
+        e.printStackTrace();
+        return new ResponseEntity("Такой объект уже существует!", HttpStatus.CONFLICT);
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<?> handleException(MovieNotFoundException e){
         return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
@@ -21,6 +33,7 @@ public class ExceptionHandler {
     public ResponseEntity<?> handleException(OrderDetailNotFoundException e){
         return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
     }
+
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<?> handleException(OrderNotFoundException e){
