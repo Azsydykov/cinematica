@@ -3,10 +3,11 @@ package kg.mega.cinematica.dao;
 import kg.mega.cinematica.models.entities.RoomMoviePrice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
-
+@Repository
 public interface RoomMoviePriceRep extends JpaRepository<RoomMoviePrice,Long> {
 
     @Query(value = "select * from tb_room_movie_price as rmp\n" +

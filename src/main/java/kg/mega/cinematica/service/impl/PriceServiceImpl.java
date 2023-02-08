@@ -55,7 +55,8 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public List<PriceDto> findPrice(PriceType priceType) {
-        return mapper.toDtos(rep.findPrice(priceType));
+        List<PriceDto> list =mapper.toDtos(rep.findPrice(priceType));
+        return list;
     }
 
     @Override

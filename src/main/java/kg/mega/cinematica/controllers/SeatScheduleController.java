@@ -2,6 +2,8 @@ package kg.mega.cinematica.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import kg.mega.cinematica.exceptions.ExceptionHandler;
+import kg.mega.cinematica.exceptions.RoomMovieNotFoundException;
 import kg.mega.cinematica.models.dto.SeatScheduleDto;
 import kg.mega.cinematica.models.responces.SeatScheduleResponse;
 import kg.mega.cinematica.service.SeatScheduleService;
@@ -23,20 +25,20 @@ public class SeatScheduleController {
     @PostMapping("/save")
     @ApiOperation("Сохранение")
     ResponseEntity<?> save(@RequestBody SeatScheduleDto seatScheduleDto) {
-            return new ResponseEntity<>(service.save(seatScheduleDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.save(seatScheduleDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/create")
     @ApiOperation("Создание")
     ResponseEntity<?> create(@RequestParam Long roomMovieId,
                              @RequestParam List<Long> seatsId) {
-        return new ResponseEntity<>(service.create(roomMovieId,seatsId), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.create(roomMovieId, seatsId), HttpStatus.CREATED);
     }
 
     @GetMapping("/findById")
     @ApiOperation("Поиск seatSchedule по id")
     ResponseEntity<?> findById(@RequestParam Long id) {
-        return  ResponseEntity.ok(service.findById(id));
+        return ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/findAll")
@@ -54,7 +56,11 @@ public class SeatScheduleController {
     @GetMapping("/getdByRoomMovieId")
     @ApiOperation("Поиск по id сеанса")
     ResponseEntity<List<SeatScheduleResponse>> getByRoomMovieId(@RequestParam Long roomMovieId) {
-        return  ResponseEntity.ok(service.getByRoomMovieId(roomMovieId));
+        try {
+            return ResponseEntity.ok(service.getByRoomMovieId(roomMovieId));
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
     }
 
 }

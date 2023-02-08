@@ -115,7 +115,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponse getOrderDetail(List<OrderDetailDto> orderDetailDtoList) {
-        OrderDto orderDto = create();
+        OrderDto orderDto = orderDetailDtoList.get(0).getOrder();
         OrderResponse orderResponse = new OrderResponse();
         orderResponse.setMovieName(orderDetailDtoList.get(0).getSeatSchedule().getRoomMovie().getMovie().getName());
         orderResponse.setRoom(orderDetailDtoList.get(0).getSeatSchedule().getRoomMovie().getRoom().getName());
@@ -135,7 +135,7 @@ public class OrderServiceImpl implements OrderService {
             totalPrice += priceService.getPrice(item.getPriceType());
 
         }
-        //проверить сохранение тоталПрайс
+
         orderDto.setPrice(totalPrice);
         save(orderDto);
 

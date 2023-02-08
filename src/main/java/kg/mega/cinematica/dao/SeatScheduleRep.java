@@ -3,9 +3,10 @@ package kg.mega.cinematica.dao;
 import kg.mega.cinematica.models.entities.SeatSchedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface SeatScheduleRep extends JpaRepository<SeatSchedule,Long> {
     @Query(value = "select * from tb_seat_schedule as ss" +
             "\n" +
