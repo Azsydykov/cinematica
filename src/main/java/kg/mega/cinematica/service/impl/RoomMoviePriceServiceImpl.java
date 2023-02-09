@@ -43,6 +43,11 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
     }
 
     @Override
+    public List<RoomMoviePriceDto> findRoomMoviePriceByRoomMovieId(Long roomMovieId) {
+        return mapper.toDtos(rep.findRoomMoviePriceByRoomMovieId(roomMovieId));
+    }
+
+    @Override
     public Response create(Long roomMovieId, List<Long> priceList) {
         RoomMovieDto roomMovieDto = roomMovieService.findById(roomMovieId);
 

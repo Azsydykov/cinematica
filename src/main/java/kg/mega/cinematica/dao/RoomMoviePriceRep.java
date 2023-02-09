@@ -17,4 +17,6 @@ public interface RoomMoviePriceRep extends JpaRepository<RoomMoviePrice,Long> {
             "where rm.movie_id=:movieId and  s.start_day=:startDate",nativeQuery = true)
     List<RoomMoviePrice> findPriceByMovieId(Long movieId,LocalDate startDate);
 
+    List<RoomMoviePrice> findRoomMoviePriceByRoomMovieId(Long id);
+
 }
