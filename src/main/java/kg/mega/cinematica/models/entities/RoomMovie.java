@@ -24,8 +24,7 @@ public class RoomMovie extends WorkDate{
     Movie movie;
     @ManyToOne
     Schedule schedule;
-//    @OneToMany(mappedBy = "roomMovie")
-//    List<RoomMoviePrice> roomMoviePrice;
+
 
 
 

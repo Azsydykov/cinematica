@@ -7,6 +7,7 @@ import kg.mega.cinematica.mappers.RoomMoviePriceMapper;
 import kg.mega.cinematica.models.dto.PriceDto;
 import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.dto.RoomMoviePriceDto;
+import kg.mega.cinematica.models.request.SaveRoomMoviePriceRequest;
 import kg.mega.cinematica.models.responces.*;
 import kg.mega.cinematica.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +24,16 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
     private final RoomMoviePriceRep rep;
     private final RoomMovieService roomMovieService;
     private final PriceService priceService;
-    private final CinemaService cinemaService;
     private PriceType priceType;
-    private RoomService roomService;
+
 
     @Autowired
     public RoomMoviePriceServiceImpl(RoomMoviePriceRep rep, RoomMovieService roomMovieService,
-                                     PriceService priceService, CinemaService cinemaService,
-                                     RoomService roomService) {
+                                     PriceService priceService) {
         this.rep = rep;
         this.roomMovieService = roomMovieService;
         this.priceService = priceService;
-        this.cinemaService = cinemaService;
-        this.roomService = roomService;
+
 
     }
 
@@ -56,8 +54,7 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
             roomMoviePriceDto.setPrice(priceDto);
             save(roomMoviePriceDto);
         }
-
-        return new Response("Saved Successfully");
+        return new Response("Saved successfully!");
     }
 
     @Override
@@ -85,7 +82,7 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
     @Override
     public GetRoomMovieResponse getRoomMovieByMovieId(Long movieId, LocalDate startDate) {
         List<RoomMoviePriceDto> roomMoviePriceList = findPriceByMovieId(movieId, startDate);
-        Collections.sort(roomMoviePriceList); //данные об одном сеансе идут последовательно
+     //   Collections.sort(roomMoviePriceList); //данные об одном сеансе идут последовательно
 
         List<RoomMovieDto> roomMovieDtos = roomMovieService.findRoomMovieByMovieId(movieId, startDate);
 
@@ -103,19 +100,18 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
 
             for (RoomMoviePriceDto item : roomMoviePriceList) {
 
-
                 if (roomMovieItem.getSchedule().getId().equals(item.getRoomMovie().getSchedule().getId())) {
-                    if (item.getRoomMovie().getId().equals(roomMovieItem.getId())) {
+                    if (item.getRoomMovie().getId().equals(roomMovieItem.getId()) && item.getRoomMovie().isActive()) {
                         //проверка на время сеанса
                         if (!roomMovieResponseList.isEmpty() &&
-                                roomMovieResponseList.get((int) roomMovieResponseList.stream().count() - 1).getId() == item.getRoomMovie().getId()) {
+                                roomMovieResponseList.get((int) roomMovieResponseList.stream().count() - 1).getRoomMovieId() == item.getRoomMovie().getId()) {
                             roomMovieResp = roomMovieResponseList.get((int) roomMovieResponseList.stream().count() - 1);
                             //проверка есть ли в списке уже этот зал с ценой
                             //если да, то обновляем его прайс, если нет то создаем новый
 
                             roomMovieResponseList.remove((int) roomMovieResponseList.stream().count() - 1);//удаляем чтобы не было дубликатов
                         } else {
-                            roomMovieResp.setId(item.getRoomMovie().getId());
+                            roomMovieResp.setRoomMovieId(item.getRoomMovie().getId());
 
                         }
                         priceType = item.getPrice().getPriceType();
@@ -155,7 +151,7 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
             List<RoomResponse> newRoomResp = new ArrayList();
 
             for (RoomResponse roomResponseItem : roomResponses) {
-                if (item.getRoom().getId().equals(roomResponseItem.getRoomId())) {
+                if (item.getRoom().getId().equals(roomResponseItem.getRoomId()) && item.getRoom().isActive()) {
                     for (RoomResponse rp : newRoomResp)
                     {
                         if (rp.getRoomId().equals(item.getRoom().getId())) {

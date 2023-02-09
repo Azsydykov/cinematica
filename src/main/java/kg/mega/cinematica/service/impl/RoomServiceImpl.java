@@ -56,7 +56,6 @@ public class RoomServiceImpl implements RoomService {
         roomDto.setSeatCount(room.getSeatCount());
         roomDto.setCinema(cinema);
         return save(roomDto);
-
     }
 
     @Override

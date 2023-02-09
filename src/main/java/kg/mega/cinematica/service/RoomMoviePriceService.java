@@ -11,7 +11,6 @@ public interface RoomMoviePriceService extends BaseService<RoomMoviePriceDto>{
 
     Response create(Long roomMovieId, List<Long> priceList);
     List<RoomMoviePriceDto> findPriceByMovieId(Long movieId,LocalDate startDate);
-
     GetRoomMovieResponse getRoomMovieByMovieId(Long movieId, LocalDate startDate);
 
 

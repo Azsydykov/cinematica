@@ -11,7 +11,7 @@ import java.time.LocalTime;
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoomMovieResponse {
-    Long id;
+    Long roomMovieId;
     Double childPrice;
     Double standardPrice;
     LocalTime startTime;

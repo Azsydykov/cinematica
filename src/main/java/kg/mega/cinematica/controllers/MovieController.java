@@ -40,7 +40,7 @@ public class MovieController {
     }
 
     @GetMapping("/findAll")
-    @ApiOperation("Вывод всех фильмов (json)")
+    @ApiOperation("Вывод всех фильмов")
     ResponseEntity<List<MovieDto>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
@@ -52,7 +52,7 @@ public class MovieController {
     }
 
     @GetMapping("/getAllMovies")
-    @ApiOperation("Вывод всех фильмов")
+    @ApiOperation("Вывод всех фильмов (limit/offset)")
     ResponseEntity<List<GetAllMoviesResponse>> getAllMovies(@RequestParam int limit, @RequestParam int offset) {
         return ResponseEntity.ok(service.getAllMovies(limit, offset));
     }

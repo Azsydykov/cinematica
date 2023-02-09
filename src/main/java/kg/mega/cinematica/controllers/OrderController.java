@@ -20,8 +20,12 @@ import java.util.Map;
 @RequestMapping("/api/v1/order")
 public class OrderController {
 
+
+    private final OrderService service;
     @Autowired
-    private OrderService service;
+    public OrderController(OrderService service) {
+        this.service = service;
+    }
 
     @PostMapping("/save")
     @ApiOperation("Сохранение")

@@ -7,6 +7,7 @@ import kg.mega.cinematica.models.dto.MovieDto;
 import kg.mega.cinematica.models.dto.RoomDto;
 import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.dto.ScheduleDto;
+import kg.mega.cinematica.models.request.SaveMovieRequest;
 import kg.mega.cinematica.models.request.SaveRoomMovieRequest;
 import kg.mega.cinematica.models.responces.Response;
 import kg.mega.cinematica.service.MovieService;
@@ -46,7 +47,8 @@ public class RoomMovieServiceImpl implements RoomMovieService {
     }
 
     @Override
-    public Response create(SaveRoomMovieRequest roomMovie) {
+    public RoomMovieDto create(SaveRoomMovieRequest roomMovie) {
+
         MovieDto movieDto = movieService.findById(roomMovie.getMovieId());
         RoomDto roomDto = roomService.findById(roomMovie.getRoomId());
         ScheduleDto scheduleDto = scheduleService.findById(roomMovie.getScheduleId());
@@ -55,9 +57,9 @@ public class RoomMovieServiceImpl implements RoomMovieService {
         roomMovieDto.setRoom(roomDto);
         roomMovieDto.setSchedule(scheduleDto);
 
-        save(roomMovieDto);
 
-        return new Response("Saved successfully!");
+
+        return save(roomMovieDto);
     }
 
     @Override

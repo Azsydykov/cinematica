@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface RoomMovieService extends BaseService<RoomMovieDto>{
-    Response create(SaveRoomMovieRequest roomMovie);
+    RoomMovieDto create(SaveRoomMovieRequest roomMovie);
 
     List<RoomMovieDto> getAllByMovieId(Long id);
 
