@@ -53,7 +53,7 @@ public class RoomMoviePriceServiceImpl implements RoomMoviePriceService {
 
         for (Long id : priceList) {
             PriceDto priceDto = priceService.findById(id);
-
+    
             RoomMoviePriceDto roomMoviePriceDto = new RoomMoviePriceDto();
             roomMoviePriceDto.setRoomMovie(roomMovieDto);
             roomMoviePriceDto.setPrice(priceDto);

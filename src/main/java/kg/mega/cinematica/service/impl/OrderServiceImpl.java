@@ -134,9 +134,7 @@ public class OrderServiceImpl implements OrderService {
             seats.add(seatResponse);
 
             totalPrice += priceService.getPrice(item.getPriceType());
-
         }
-
         orderDto.setPrice(totalPrice);
         save(orderDto);
 

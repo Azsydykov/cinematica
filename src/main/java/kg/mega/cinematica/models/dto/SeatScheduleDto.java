@@ -1,6 +1,5 @@
 package kg.mega.cinematica.models.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import kg.mega.cinematica.enums.SeatStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
