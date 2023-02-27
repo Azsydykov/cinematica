@@ -1,5 +1,6 @@
-package kg.mega.cinematica.models.responces;
+package kg.mega.cinematica.models.responses;
 
+import kg.mega.cinematica.enums.PriceType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,20 +8,21 @@ import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 @Setter
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class OrderResponse {
-    long orderId;
-    String movieName;
-    String cinemaName;
+public class OrderDetailResponse {
+
+    Long orderId;
+    String movie;
+    String cinema;
     String room;
-    List<SeatResponse> seats;
+    int row;
+    int seatNumber;
+    PriceType priceType;
     LocalDate startDay;
     LocalTime startTime;
-    double totalPrice;
-
+    double price;
 
 }

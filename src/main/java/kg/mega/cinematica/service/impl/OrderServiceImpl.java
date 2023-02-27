@@ -6,10 +6,8 @@ import kg.mega.cinematica.enums.SeatStatus;
 import kg.mega.cinematica.exceptions.OrderNotFoundException;
 import kg.mega.cinematica.mappers.OrderMapper;
 import kg.mega.cinematica.models.dto.*;
-import kg.mega.cinematica.models.entities.RoomMoviePrice;
-import kg.mega.cinematica.models.responces.OrderResponse;
-import kg.mega.cinematica.models.responces.Response;
-import kg.mega.cinematica.models.responces.SeatResponse;
+import kg.mega.cinematica.models.responses.OrderResponse;
+import kg.mega.cinematica.models.responses.SeatResponse;
 import kg.mega.cinematica.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,7 +95,6 @@ public class OrderServiceImpl implements OrderService {
             seatScheduleService.save(seatScheduleDto);
 
             scheduleDtos = seatScheduleService.findByRoomMovieAndSeatsId(roomMovieId, entry.getKey());
-
 
             for (SeatScheduleDto item : scheduleDtos) {
                 SeatScheduleDto seatScheduleDto1 = seatScheduleService.findById(item.getId());

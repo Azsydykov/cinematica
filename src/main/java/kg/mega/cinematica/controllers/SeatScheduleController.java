@@ -2,10 +2,8 @@ package kg.mega.cinematica.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import kg.mega.cinematica.exceptions.ExceptionHandler;
-import kg.mega.cinematica.exceptions.RoomMovieNotFoundException;
 import kg.mega.cinematica.models.dto.SeatScheduleDto;
-import kg.mega.cinematica.models.responces.SeatScheduleResponse;
+import kg.mega.cinematica.models.responses.SeatScheduleResponse;
 import kg.mega.cinematica.service.SeatScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

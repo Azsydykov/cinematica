@@ -2,7 +2,7 @@ package kg.mega.cinematica.service;
 
 import kg.mega.cinematica.models.dto.MovieDto;
 import kg.mega.cinematica.models.request.SaveMovieRequest;
-import kg.mega.cinematica.models.responces.GetAllMoviesResponse;
+import kg.mega.cinematica.models.responses.GetAllMoviesResponse;
 
 import java.util.List;
 

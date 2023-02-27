@@ -3,7 +3,7 @@ package kg.mega.cinematica.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kg.mega.cinematica.models.dto.RoomMoviePriceDto;
-import kg.mega.cinematica.models.responces.GetRoomMovieResponse;
+import kg.mega.cinematica.models.responses.*;
 import kg.mega.cinematica.service.RoomMoviePriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -60,5 +60,37 @@ public class RoomMoviePriceController {
                                                                @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDay) {
             return ResponseEntity.ok(service.getRoomMovieByMovieId(movieId, startDay));
         //(defaultValue = "yyyy-MM-dd")
+    }
+
+    @GetMapping("/getRoomMovieByCinemaId")
+    @ApiOperation("Вывод сеанса по id кинотеатра")
+    ResponseEntity<GetRoomMovieByCinemaResponse> getRoomMovieByCinemaId(@RequestParam Long cinemaId,
+                                                                       @RequestParam
+                                                               @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDay) {
+        return ResponseEntity.ok(service.getRoomMovieByCinemaId(cinemaId, startDay));
+    }
+
+    @GetMapping("/getRoomMovieResponse")
+    @ApiOperation("Вывод сеанса по id кинотеатра test1")
+    ResponseEntity<List<RoomMovieResponse>> getRoomMovieResponse(@RequestParam Long cinemaId,
+                                                                 @RequestParam
+                                                                        @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDay) {
+        return ResponseEntity.ok(service.getRoomMovieResponse(cinemaId, startDay));
+    }
+
+    @GetMapping("/getMovieResponse")
+    @ApiOperation("Вывод сеанса по id кинотеатра test2")
+    ResponseEntity<List<MovieResponse>> getMovieResponse(@RequestParam Long cinemaId,
+                                                         @RequestParam
+                                                                       @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDay) {
+        return ResponseEntity.ok(service.getMovieResponse(cinemaId, startDay));
+    }
+
+    @GetMapping("/getRoomResp")
+    @ApiOperation("Вывод сеанса по id кинотеатра test3")
+    ResponseEntity<List<RoomResp>> getRoomResp(@RequestParam Long cinemaId,
+                                               @RequestParam
+                                                         @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDay) {
+        return ResponseEntity.ok(service.getRoomResp(cinemaId, startDay));
     }
 }

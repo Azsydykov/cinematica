@@ -1,4 +1,4 @@
-package kg.mega.cinematica.models.responces;
+package kg.mega.cinematica.models.responses;
 
 import lombok.AccessLevel;
 import lombok.Getter;

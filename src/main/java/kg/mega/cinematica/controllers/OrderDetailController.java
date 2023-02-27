@@ -3,9 +3,7 @@ package kg.mega.cinematica.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import kg.mega.cinematica.enums.PriceType;
 import kg.mega.cinematica.models.dto.OrderDetailDto;
-import kg.mega.cinematica.models.responces.OrderResponse;
 import kg.mega.cinematica.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Api(tags = "Детали заказа")
 @RestController

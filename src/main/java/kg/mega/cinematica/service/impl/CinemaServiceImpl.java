@@ -5,10 +5,12 @@ import kg.mega.cinematica.exceptions.CinemaNotFoundException;
 import kg.mega.cinematica.mappers.CinemaMapper;
 import kg.mega.cinematica.models.dto.CinemaDto;
 import kg.mega.cinematica.models.request.SaveCinemaRequest;
+import kg.mega.cinematica.models.responses.GetAllCinemasResponse;
 import kg.mega.cinematica.service.CinemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -57,7 +59,23 @@ public class CinemaServiceImpl implements CinemaService {
     }
 
     @Override
-    public List<CinemaDto> findCinemaByRoomId(Long roomId) {
-        return mapper.toDtos(rep.findCinemaByRoomId(roomId));
+    public List<CinemaDto> findAllCinemas(int limit, int offset) {
+        return mapper.toDtos(rep.findAllCinemas(limit,offset));
+    }
+
+    @Override
+    public List<GetAllCinemasResponse> getAllCinemas(int limit, int offset) {
+        List<CinemaDto> cinemasList = findAllCinemas(limit,offset);
+        List<GetAllCinemasResponse> getAllCinemasResponseList = new ArrayList<>();
+
+        for (CinemaDto item:cinemasList){
+            GetAllCinemasResponse getAllCinemasResponse= new GetAllCinemasResponse();
+            getAllCinemasResponse.setId(item.getId());
+            getAllCinemasResponse.setName(item.getName());
+            getAllCinemasResponse.setLogo(item.getLogo());
+            getAllCinemasResponse.setAddress(item.getAddress());
+            getAllCinemasResponseList.add(getAllCinemasResponse);
+        }
+        return getAllCinemasResponseList;
     }
 }

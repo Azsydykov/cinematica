@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kg.mega.cinematica.models.dto.CinemaDto;
 import kg.mega.cinematica.models.request.SaveCinemaRequest;
+import kg.mega.cinematica.models.responses.GetAllCinemasResponse;
 import kg.mega.cinematica.service.CinemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,6 +50,12 @@ public class CinemaController {
     @ApiOperation("Удаление")
     ResponseEntity<?> delete(@RequestParam Long id) {
             return ResponseEntity.ok(service.delete(id));
+    }
+
+    @GetMapping("/getAllCinemas")
+    @ApiOperation("Вывод всех кинотеатров (limit/offset)")
+    ResponseEntity<List<GetAllCinemasResponse>> getAllCinemas(@RequestParam int limit, @RequestParam int offset) {
+        return ResponseEntity.ok(service.getAllCinemas(limit, offset));
     }
 
 

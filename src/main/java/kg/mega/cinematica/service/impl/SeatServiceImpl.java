@@ -6,13 +6,12 @@ import kg.mega.cinematica.mappers.SeatMapper;
 import kg.mega.cinematica.models.dto.RoomDto;
 import kg.mega.cinematica.models.dto.SeatDto;
 import kg.mega.cinematica.models.request.SaveSeatRequest;
-import kg.mega.cinematica.models.responces.Response;
+import kg.mega.cinematica.models.responses.Response;
 import kg.mega.cinematica.service.RoomService;
 import kg.mega.cinematica.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -75,7 +74,6 @@ public class SeatServiceImpl implements SeatService {
                 save(seatDto);
             }
         }
-
         return new Response("Saved successfully!");
     }
 }

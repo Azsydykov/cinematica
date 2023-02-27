@@ -8,7 +8,7 @@ import kg.mega.cinematica.models.dto.RoomDto;
 import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.dto.SeatDto;
 import kg.mega.cinematica.models.dto.SeatScheduleDto;
-import kg.mega.cinematica.models.responces.SeatScheduleResponse;
+import kg.mega.cinematica.models.responses.SeatScheduleResponse;
 import kg.mega.cinematica.service.RoomMovieService;
 import kg.mega.cinematica.service.RoomService;
 import kg.mega.cinematica.service.SeatScheduleService;
@@ -73,41 +73,41 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
     @Override
     public List<SeatScheduleResponse> getByRoomMovieId(Long roomMovieId) {
         List<SeatScheduleDto> seatScheduleList = findByRoomMovieId(roomMovieId);
-
         List<SeatScheduleResponse> seatScheduleResList = new ArrayList<>();
 
         RoomDto roomDto = roomService.findRoomByRoomMovieId(roomMovieId);
-
         List<SeatDto> seatList = seatService.findSeatsByRoomId(roomDto.getId());
 
         for (SeatDto seatsItem : seatList) {
             SeatScheduleResponse seatScheduleResponse = new SeatScheduleResponse();
 
             if (seatScheduleList.isEmpty()) {
-                seatScheduleResponse.setSeatScheduleId(seatsItem.getId());
-                seatScheduleResponse.setStatus(SeatStatus.FREE);
-                seatScheduleResponse.setSeatNum(seatsItem.getNumber());
-                seatScheduleResponse.setRow(seatsItem.getRow());
+                setSeatScheduleResponse(seatsItem,seatScheduleResponse);
             }
             for (SeatScheduleDto seatScheduleItem : seatScheduleList) {
                 SeatScheduleDto seatScheduleDto = seatScheduleItem;
 
                 if (seatsItem.getId().equals(seatScheduleDto.getSeat().getId())) {
-                    seatScheduleResponse.setSeatScheduleId(seatScheduleDto.getSeat().getId());
+                    seatScheduleResponse.setSeatScheduleId(seatScheduleItem.getId());
                     seatScheduleResponse.setStatus(seatScheduleItem.getSeatStatus());
                     seatScheduleResponse.setRow(seatScheduleItem.getSeat().getRow());
                     seatScheduleResponse.setSeatNum(seatScheduleItem.getSeat().getNumber());
                     break;
                 } else {
-                    seatScheduleResponse.setSeatScheduleId(seatsItem.getId());
-                    seatScheduleResponse.setStatus(SeatStatus.FREE);
-                    seatScheduleResponse.setSeatNum(seatsItem.getNumber());
-                    seatScheduleResponse.setRow(seatsItem.getRow());
+                    setSeatScheduleResponse(seatsItem,seatScheduleResponse);
                 }
             }
             seatScheduleResList.add(seatScheduleResponse);
         }
         return seatScheduleResList;
+    }
+
+
+    void setSeatScheduleResponse(SeatDto seatsItem, SeatScheduleResponse seatScheduleResponse){
+        seatScheduleResponse.setSeatScheduleId(seatsItem.getId());
+        seatScheduleResponse.setStatus(SeatStatus.FREE);
+        seatScheduleResponse.setSeatNum(seatsItem.getNumber());
+        seatScheduleResponse.setRow(seatsItem.getRow());
     }
 
     @Override

@@ -1,7 +1,7 @@
 package kg.mega.cinematica.service;
 
 import kg.mega.cinematica.models.dto.SeatScheduleDto;
-import kg.mega.cinematica.models.responces.SeatScheduleResponse;
+import kg.mega.cinematica.models.responses.SeatScheduleResponse;
 
 import java.util.List;
 

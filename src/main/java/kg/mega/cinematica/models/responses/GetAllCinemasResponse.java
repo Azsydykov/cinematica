@@ -1,4 +1,4 @@
-package kg.mega.cinematica.models.responces;
+package kg.mega.cinematica.models.responses;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,10 +8,10 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SeatResponse {
-    int row;
-    int seatNumber;
+public class GetAllCinemasResponse {
 
-
-
+    Long id;
+    String name;
+    String logo;
+    String address;
 }

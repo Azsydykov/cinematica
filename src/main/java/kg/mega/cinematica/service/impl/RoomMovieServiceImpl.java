@@ -7,9 +7,7 @@ import kg.mega.cinematica.models.dto.MovieDto;
 import kg.mega.cinematica.models.dto.RoomDto;
 import kg.mega.cinematica.models.dto.RoomMovieDto;
 import kg.mega.cinematica.models.dto.ScheduleDto;
-import kg.mega.cinematica.models.request.SaveMovieRequest;
 import kg.mega.cinematica.models.request.SaveRoomMovieRequest;
-import kg.mega.cinematica.models.responces.Response;
 import kg.mega.cinematica.service.MovieService;
 import kg.mega.cinematica.service.RoomMovieService;
 import kg.mega.cinematica.service.RoomService;
@@ -38,7 +36,6 @@ public class RoomMovieServiceImpl implements RoomMovieService {
         this.movieService = movieService;
         this.roomService = roomService;
         this.scheduleService = scheduleService;
-
     }
 
     @Override
@@ -56,9 +53,6 @@ public class RoomMovieServiceImpl implements RoomMovieService {
         roomMovieDto.setMovie(movieDto);
         roomMovieDto.setRoom(roomDto);
         roomMovieDto.setSchedule(scheduleDto);
-
-
-
         return save(roomMovieDto);
     }
 
@@ -86,7 +80,11 @@ public class RoomMovieServiceImpl implements RoomMovieService {
 
     @Override
     public List<RoomMovieDto> findRoomMovieByMovieId(Long movieId, LocalDate startDay) {
-
         return mapper.toDtos(rep.findRoomMovieByMovieId(movieId, startDay));
+    }
+
+    @Override
+    public List<RoomMovieDto> findRoomMovieByCinemaId(Long cinemaId, LocalDate startDate) {
+        return mapper.toDtos(rep.findRoomMovieByCinemaId(cinemaId,startDate));
     }
 }

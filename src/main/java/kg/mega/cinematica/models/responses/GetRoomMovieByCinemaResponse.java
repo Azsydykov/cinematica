@@ -1,4 +1,4 @@
-package kg.mega.cinematica.models.responces;
+package kg.mega.cinematica.models.responses;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,7 +10,12 @@ import java.util.List;
 @Setter
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CinemaResponse {
+public class GetRoomMovieByCinemaResponse {
+
+    Long id;
     String name;
-    List<RoomResponse> rooms;
+    String logo;
+    String address;
+    List<RoomResp> rooms;
+
 }

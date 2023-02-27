@@ -5,7 +5,7 @@ import kg.mega.cinematica.exceptions.MovieNotFoundException;
 import kg.mega.cinematica.mappers.MovieMapper;
 import kg.mega.cinematica.models.dto.MovieDto;
 import kg.mega.cinematica.models.request.SaveMovieRequest;
-import kg.mega.cinematica.models.responces.GetAllMoviesResponse;
+import kg.mega.cinematica.models.responses.GetAllMoviesResponse;
 import kg.mega.cinematica.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

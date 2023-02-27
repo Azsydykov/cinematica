@@ -3,7 +3,7 @@ package kg.mega.cinematica.service;
 import kg.mega.cinematica.enums.PriceType;
 import kg.mega.cinematica.models.dto.OrderDetailDto;
 import kg.mega.cinematica.models.dto.OrderDto;
-import kg.mega.cinematica.models.responces.OrderResponse;
+import kg.mega.cinematica.models.responses.OrderResponse;
 
 import java.util.List;
 import java.util.Map;

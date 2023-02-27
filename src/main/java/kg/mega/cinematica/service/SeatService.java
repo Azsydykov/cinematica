@@ -2,7 +2,7 @@ package kg.mega.cinematica.service;
 
 import kg.mega.cinematica.models.dto.SeatDto;
 import kg.mega.cinematica.models.request.SaveSeatRequest;
-import kg.mega.cinematica.models.responces.Response;
+import kg.mega.cinematica.models.responses.Response;
 
 import java.util.List;
 
