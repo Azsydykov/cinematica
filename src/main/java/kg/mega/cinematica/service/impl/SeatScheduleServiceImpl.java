@@ -122,7 +122,6 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
         SeatScheduleDto seatScheduleDto = new SeatScheduleDto();
         for (Long id : seatsId) {
             SeatDto seatDto = seatService.findById(id);
-
             seatScheduleDto.setRoomMovie(roomMovieDto);
             seatScheduleDto.setSeat(seatDto);
             seatScheduleDto.setSeatStatus(SeatStatus.BOUGHT);
@@ -130,4 +129,6 @@ public class SeatScheduleServiceImpl implements SeatScheduleService {
         }
         return seatScheduleDto ;
     }
+
+
 }
